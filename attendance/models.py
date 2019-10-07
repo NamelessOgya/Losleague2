@@ -126,8 +126,8 @@ class ClassWinRate(models.Model):
         return self.leader
 
 class Blog(models.Model):
-    title = models.CharField(max_length=100, default="")
-    context = models.CharField(max_length=200, default="")
+    title = models.CharField(max_length=500, default="")
+    context = models.TextField(max_length=200, default="")
 
 
 
