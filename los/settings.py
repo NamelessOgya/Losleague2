@@ -131,3 +131,15 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = '/attendance/user/'
 LOGOUT_REDIRECT_URL = '/logout'
 
+#heroku用
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
+
