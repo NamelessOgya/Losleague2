@@ -1,0 +1,35 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        {% for key, value in dicts.items %}
+            <div class = "box">
+                <div class = "tytlebox">
+                    <p>{{key}}</p>
+                </div>
+                <div class = "contentbox">
+                   {% for x,y in value.items %}
+                      <table border = "1">
+                          <tr>
+                          <th>{{x}}</th>
+                          </tr>
+                          <tr>
+                                <th>{{y.team1}}</th>
+                                <th></th>
+                                <th>{{y.team2}}</th>
+                          </tr>
+                          <tr>
+                                <th>{{y.point1}}</th>
+                                <th></th>
+                                <th>{{y.point2}}</th>
+
+                          </tr>
+                      </table>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+{% endblock %}
+</html>

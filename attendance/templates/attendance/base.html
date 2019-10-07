@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+    <head>
+        <title>losleague</title>
+        <link href="{% static 'home.css' %}" rel="stylesheet" type="text/css">
+        <meta charset="UTF-8">
+    </head>
+
+
+    <body>
+        <div class = "all">
+            <header>
+                <div class = "icon" onclick = "location.href='/'">
+                    <img src = "{% static 'los/logo.png' %}" class="logo">
+                </div>
+                <div class = "login" onclick = "location.href=' /attendance/match_list'">
+                    <p>対戦表</p>
+                </div>
+                <div class = "login" onclick = "location.href='/accounts/login'">
+                    <p>login</p>
+                </div>
+
+            </header>
+
+
+{% block content %}
+{% endblock %}
+                        <footer>
+                <div class = "footerbox">
+                    <p>twitter</p>
+                    <p>openrec</p>
+                    <p>youtube</p>
+                </div>
+            </footer>
+        </div>
+
+    </body>

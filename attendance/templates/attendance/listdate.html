@@ -1,0 +1,23 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+
+            <div class = "box">
+                <div class = "tytlebox">
+                    <p>マッチング試合日を選択</p>
+                </div>
+                <div class = "contentbox">
+                    <ul>
+                        {%  for key, value in dic.items %}
+                        <li><a href = matchlist/{{ key }}/> {{ value }} </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+
+{% endblock %}
+</html>

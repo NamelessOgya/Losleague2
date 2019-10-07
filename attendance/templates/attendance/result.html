@@ -1,0 +1,29 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+
+            <div class = "box">
+                <div class = "tytlebox">
+                    <p>登録内容確認</p>
+                </div>
+                <div class = "contentbox">
+                    <a>{{user.username}}登録内容</a>
+                    {% for key, value in dic.items %}
+                        <br>{{key}}</br>
+                            <ul>
+                                {% for p, q in value.items %}
+                                <li>{{p}} {{q}}</li>
+                                {% endfor %}
+                            </ul>
+                    {% endfor %}
+                    <a href = /accounts/logout/>logout</a>
+                    <br><a href = / >home</a></br>
+                    <br><a href = /attendance/index>再登録</a></br>
+
+                </div>
+            </div>
+
+{% endblock %}
+</html>

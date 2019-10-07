@@ -1,0 +1,21 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class = "box">
+    <div class = "tytlebox">
+        <p>チーム{{user.username}}</p>
+    </div>
+    <div class = "contentbox">
+        <p>オーダー登録したい試合日を選択してください</p>
+        <ul>
+            {%  for key, value in dic.items %}
+                <li><a href = register/{{ key }}/> {{ value }} </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+</html>
