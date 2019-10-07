@@ -1,1 +1,1 @@
-web: gunicorn losleagueweb.wsgi --log-file -
+web: gunicorn los.wsgi --log-file -
