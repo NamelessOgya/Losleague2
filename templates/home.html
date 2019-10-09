@@ -1,22 +1,27 @@
-<html>
+
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
 <!--     テーマ画像-->
-            <div class = "theme">
-                <img src = "{% static 'los/home.jpg' %}" class="home">
-            </div>
+<div class="jumbotron home">
+                <div class="container-fluid">
+
+                </div>
+</div>
 <!--タブメニュー。参考url...https://bagelee.com/design/css/create_tabs_using_only_css/-->
-            <div class="tabs">
-              <input id="all" type="radio" name="tab_item" checked>
-              <label class="tab_item" for="all">チーム順位</label>
-              <input id="programming" type="radio" name="tab_item">
-              <label class="tab_item" for="programming">個人成績上位者</label>
-              <input id="design" type="radio" name="tab_item">
-              <label class="tab_item" for="design">個人成績上位者</label>
+<div class="container">
+    <div class="container contentbox box">
+       <div class="mx-auto">
+            <ul class="nav nav-tabs">
+                <li class="active tabbutton"><a data-toggle="tab" href="#home">チーム</a></li>
+                <li class="tabbutton"><a data-toggle="tab" href="#menu1">個人</a></li>
+                <li class="tabbutton"><a data-toggle="tab" href="#menu2">クラス別</a></li>
+            </ul>
+
 <!--             上位チーム成績-->
-                <div class="tab_content" id="all_content">
-                 <div class="tab_content_description">
+                <div class="tab-content">
+                  <div id="home" class="tab-pane fade in active">
+
                      <p>トップ5のみ表示</p>
                      <table border="1">
                          <tr>
@@ -36,11 +41,10 @@
                     {% endfor %}
 
                      </table>
-                </div>
-              </div>
+                  </div>
+
 <!--                個人成績上位者-->
-                <div class="tab_content" id="programming_content">
-                    <div class="tab_content_description">
+                    <div id="menu1" class="tab-pane fade">
                         <p>勝利数トップ5のみ表示</p>
                         <table border="1">
                                  <tr>
@@ -59,48 +63,47 @@
                                     </tr>
                             {% endfor %}
 
-                     </table>
-
+                         </table>
                     </div>
-                </div>
 <!--                クラス別勝利数-->
-                <div class="tab_content" id="design_content">
-                <div class="tab_content_description">
+                     <div id="menu2" class="tab-pane fade">
 
-                    <table border="1">
-                                 <tr>
-                                     <th>クラス</th>
-                                     <th>勝率</th>
-                                     <th>使用数</th>
-                                 </tr>
 
-                             {% for key, value in dic3.items %}
-                                    <tr>
-                                        {% for x, y in value.items %}
-                                        <th class="c-txtsp">
-                                         {{ y }}
-                                        </th>
-                                        {% endfor %}
-                                    </tr>
-                            {% endfor %}
+                            <table border="1">
+                                         <tr>
+                                             <th>クラス</th>
+                                             <th>勝率</th>
+                                             <th>使用数</th>
+                                         </tr>
 
-                     </table>
+                                     {% for key, value in dic3.items %}
+                                            <tr>
+                                                {% for x, y in value.items %}
+                                                <th class="c-txtsp">
+                                                 {{ y }}
+                                                </th>
+                                                {% endfor %}
+                                            </tr>
+                                    {% endfor %}
 
-                    </div>
+                             </table>
                      </div>
-            </div>
-
+                </div>
+       </div>
+</div>
+</div>
 <!--            コンテンツ一単位-->
             {% for key, value in dic4.items %}
-                <div class = "box">
-                    <div class = "tytlebox">
-                        <p>{{key}}</p>
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <a>{{key}}</a>
                     </div>
-                    <div class = "contentbox">
-                        <p>{{value.context}}</p>
+                    <div class = "panel-body contentbox">
+                        <a>{{value.context}}</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
 <!--コンテンツ1単位ここまで-->
 {% endblock %}
-</html>
