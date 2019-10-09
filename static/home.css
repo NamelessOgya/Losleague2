@@ -1,3 +1,14 @@
+@media screen and (max-width:767px) {
+    /*　画面サイズが767px以下の場合読み込む　*/
+    a { font-size:24pt;
+    }
+}
+@media screen and (min-width:768px){
+    /*　画面サイズが768px以上の場合読み込む　*/
+    a { font-size:16pt;
+    }
+}
+
 .nv{
 background-color: #00072C;
 }
