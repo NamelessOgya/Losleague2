@@ -75,11 +75,7 @@ footer{
     color:white;
 }
 
-.cal_wrapper {
-max-width: 300px;
-min-width: 200px;
-margin: 2.0833% auto;
-}
+
 
 .googlecal {
 position: relative;
