@@ -493,3 +493,6 @@ def match_result(request):
             dic = {}
 
     return render(request, 'attendance/match_result.html', {'dicts': dicts})
+
+def schedule(request):
+    return render(request,'attendance/schedule.html')
