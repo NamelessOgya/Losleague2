@@ -49,6 +49,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
 }
 .main-container {
   margin-bottom: auto;
@@ -99,6 +100,15 @@ height: 100% !important;
 .googlecal { padding-bottom: 75%; }
 }
 
+.youtube {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+.youtube iframe {
+    top:0;
 
-
-
+    width: 80% !important;
+    height: 80% !important;
+    position: absolute;
+}
