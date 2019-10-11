@@ -22,7 +22,7 @@ def season():
     return s.season
 
 def strdate(d):
-    year = d.yea
+    year = d.year
     month = d.month
     day = d.day
     return str(year) + "/" + str(month) + "/" + str(day)
