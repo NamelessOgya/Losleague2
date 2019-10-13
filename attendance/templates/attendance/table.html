@@ -8,28 +8,31 @@
                     <p>table</p>
                 </div>
                 <div class = "contentbox">
-                     {% for key, value in dic.items %}
-        <table class = "table">
-            <tr >
-              <th>{{key}}</th>
-            </tr>
-            <tr>
-                <th>一番手</th>
-                <th>二番手</th>
-                <th>三番手</th>
-                <th>四番手</th>
-                <th>五番手</th>
-                <th>補欠</th>
-            </tr>
-        {% for x, y in value.items %}
-            <tr>
-            {% for z in y %}
-                <th>{{z}}</th>
-            {% endfor %}
-            </tr>
-        {% endfor %}
-        </table><br>
-    {% endfor %}
+                     {% for key, value in dic.items % }
+                         <div class="card">
+                         <div class="card-header">テーブルの題名</div>
+                            <table class = "table">
+                                <tr>
+                                  <th>{{key}}</th>
+                                </tr>
+                                <tr>
+                                    <th>一番手</th>
+                                    <th>二番手</th>
+                                    <th>三番手</th>
+                                    <th>四番手</th>
+                                    <th>五番手</th>
+                                    <th>補欠</th>
+                                </tr>
+                            {% for x, y in value.items %}
+                                <tr>
+                                {% for z in y %}
+                                    <th>{{z}}</th>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </table><br>
+                         </div>
+                        {% endfor %}
 
     <a href = '/'>Back</a>
 
