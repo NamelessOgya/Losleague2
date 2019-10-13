@@ -99,7 +99,7 @@ def list(request, date):
             r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
             order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
             order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
-            dic[str(c)+x.team1.team_name+" vs "+x.team2.team_name] = {x.team1.team_name: order1, x.team2.team_name: order2}
+            dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = {x.team1.team_name: order1, x.team2.team_name: order2}
         except AttributeError:
             dic[str(c)] = {c: "", c: ""}
     return render(request, 'attendance/table.html', {'dic': dic})
