@@ -103,8 +103,6 @@ class PlayerResult(models.Model):
     leader = models.CharField(max_length=100, default="")
     wl = models.CharField(max_length=100, default="")
 
-    def __str__(self):
-        return str(self.date) + "/" + self.player
 
 
 class TeamResult(models.Model):
