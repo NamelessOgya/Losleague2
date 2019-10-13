@@ -233,6 +233,12 @@ def report_register(request, date):
         fourthwl = fourthwl,
         fifthwl = fifthwl,
         )
+        # Teamポイントの初期化
+        for t in Team.objects.all().filter(season=season()):
+            t.point = 0
+            t.grosspoint = 0
+            t.save()
+
     #PlayerResultとTeamResultに追加
         teamp = 0
         for d in dics:
@@ -262,11 +268,6 @@ def report_register(request, date):
             except AttributeError:
                 pass
 
-        # Teamポイントの初期化
-        for t in Team.objects.all().filter(season=season()):
-            t.point = 0
-            t.grosspoint = 0
-            t.save()
 
         #Playerポイントの初期化
         for p in Player.objects.all().filter(season=season()):
