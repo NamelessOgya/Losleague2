@@ -102,6 +102,8 @@ def list(request, date):
             dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = {x.team1.team_name: order1, x.team2.team_name: order2}
         except AttributeError:
             dic[str(c)] = {c: "", c: ""}
+
+
     return render(request, 'attendance/table.html', {'dic': dic})
 
 @login_required
