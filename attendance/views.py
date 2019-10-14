@@ -247,26 +247,26 @@ def report_register(request, date):
                 teamp+=1
 
         TeamResult.objects.create(date=date, team=team, point = teamp)
-        for m in Match.objects.all():
-            try:
-                for t in Table.objects.filter(date=m):
-                    point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
-                    team1 = t.team1.team_name
-                    point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
-                    team2 = t.team2.team_name
-                    x1 = Team.objects.filter(team_name = team1).order_by("-pk").first()
-                    x1.grosspoint += point1
-
-                    x2 = Team.objects.filter(team_name=team2).order_by("-pk").first()
-                    x2.grosspoint += point2
-                    if point1 >= 3:
-                        x1.point += 1
-                    else:
-                        x2.point += 1
-                    x1.save()
-                    x2.save()
-            except AttributeError:
-                pass
+        # for m in Match.objects.all():
+        #     try:
+        #          for t in Table.objects.filter(date=m):
+        #             point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
+        #             team1 = t.team1.team_name
+        #             point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
+        #             team2 = t.team2.team_name
+        #             x1 = Team.objects.filter(team_name=team1).order_by("-pk").first()
+        #             x1.grosspoint += point1
+        #
+        #             x2 = Team.objects.filter(team_name=team2).order_by("-pk").first()
+        #             x2.grosspoint += point2
+        #             if point1 >= 3:
+        #                 x1.point += 1
+        #             else:
+        #                 x2.point += 1
+        #             x1.save()
+        #             x2.save()
+        #     except AttributeError:
+        #          pass
 
 
         #Playerポイントの初期化
@@ -300,8 +300,9 @@ def report_register(request, date):
 
         # point,grosspointの再計算
         for m in Match.objects.all().filter(season=season()):
-            try:
-                for t in Table.objects.filter(date=m):
+
+            for t in Table.objects.filter(date=m):
+                try:
                         point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
                         team1 = t.team1.team_name
                         point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
@@ -317,8 +318,8 @@ def report_register(request, date):
                             x2.point += 1
                         x1.save()
                         x2.save()
-            except AttributeError:
-                    pass
+                except AttributeError:
+                        pass
 
     # プレイヤーオブジェクトにクラス別戦績を追加
             for p in Player.objects.all().filter(season=season()):
@@ -477,7 +478,6 @@ def report_register(request, date):
 
     s_threading = threading.Thread(target=register(date))
     s_threading.start()
-
     return render(request, 'attendance/report_request.html')
 
 def match_result(request):
