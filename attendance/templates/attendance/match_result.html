@@ -10,22 +10,26 @@
                 </div>
                 <div class = "contentbox">
                    {% for x,y in value.items %}
-                      <table border = "1">
+                    <div class="card">
+                        <div class="card-header text-center">{{x}}</div>
+
+                      <table clss="table-striped">
+<!--                          <tr>-->
+<!--                          <th>{{x}}</th>-->
+<!--                          </tr>-->
                           <tr>
-                          <th>{{x}}</th>
+                                <th class="text-center">{{y.team1}}</th>
+                                <th class="text-center">vs</th>
+                                <th class="text-center">{{y.team2}}</th>
                           </tr>
                           <tr>
-                                <th>{{y.team1}}</th>
+                                <th class="text-center">{{y.point1}}</th>
                                 <th></th>
-                                <th>{{y.team2}}</th>
-                          </tr>
-                          <tr>
-                                <th>{{y.point1}}</th>
-                                <th></th>
-                                <th>{{y.point2}}</th>
+                                <th class="text-center">{{y.point2}}</th>
 
                           </tr>
                       </table>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
