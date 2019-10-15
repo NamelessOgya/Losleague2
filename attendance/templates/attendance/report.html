@@ -3,110 +3,116 @@
 {% load static %}
     {% block content %}
 
-            <div class = "box">
-                <div class = "tytlebox">
-                    <p>結果登録</p>
-                </div>
-                <div class = "contentbox">
+<!--            <div class = "box">-->
+<!--                <div class = "tytlebox">-->
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+
+                        <a class="p-2 mb-3">結果登録</a>
+                    </div>
+                    <div class = "panel-body contentbox">
 
                             <form action="/attendance/report_date/report/{{date}}/result" methon="post">
                                 {% csrf_token %}
                                 <div>
-                                    <label>一番手</label>
-                                    <select name="first" value="">
-                                        {% for member in team_member %}
-                                        <option value = {{member}}>{{ member }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <select name = "firstwl" value="">
-                                        {% for member in winlose %}
-                                         <option value = {{member}}>{{ member }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <select name = "firstl" value="">
-                                        {% for member in leader %}
-                                         <option value = {{member}}>{{ member }}</option>
-                                        {% endfor %}
-                                    </select>
 
+                                        <label>一番手</label><br class ="d-lg-none">
+
+                                        <select name="first" value="">
+                                            {% for member in team_member %}
+                                            <option value = {{member}}>{{ member }}</option>
+                                            {% endfor %}
+                                        </select><br class ="d-lg-none">
+                                        <select name = "firstwl" value="">
+                                            {% for member in winlose %}
+                                             <option value = {{member}}>{{ member }}</option>
+                                            {% endfor %}
+                                        </select><br class ="d-lg-none">
+                                        <select name = "firstl" value="">
+                                            {% for member in leader %}
+                                             <option value = {{member}}>{{ member }}</option>
+                                            {% endfor %}
+                                        </select><br class ="d-lg-none">
                                 </div>
                                 <div>
-                                    <label>二番手</label>
+                                    <label>二番手</label><br class ="d-lg-none">
                                     <select name="second" value="">
                                         {% for member in team_member %}
                                         <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                     <select name = "secondwl" value="">
                                         {% for member in winlose %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                     <select name = "secondl" value="">
                                         {% for member in leader %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                 </div>
                                 <div>
-                                    <label>三番手</label>
+                                    <label>三番手</label><br class ="d-lg-none">
                                     <select name="third" value="">
                                         {% for member in team_member %}
                                         <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                      <select name = "thirdwl" value="">
                                         {% for member in winlose %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                     <select name = "thirdl" value="">
                                         {% for member in leader %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                 </div>
                                 <div>
-                                    <label>四番手</label>
+                                    <label>四番手</label><br class ="d-lg-none">
                                     <select name="fourth" value="">
                                         {% for member in team_member %}
                                         <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                      <select name = "fourthwl" value="">
                                         {% for member in winlose %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                     <select name = "fourthl" value="">
                                         {% for member in leader %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                 </div>
                                 <div>
-                                    <label>五番手</label>
+                                    <label>五番手</label><br class ="d-lg-none">
                                     <select name="fifth" value="">
                                         {% for member in team_member %}
                                         <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                      <select name = "fifthwl" value="">
                                         {% for member in winlose %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                     <select name = "fifthl" value="">
                                         {% for member in leader %}
                                          <option value = {{member}}>{{ member }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br class ="d-lg-none">
                                 </div>
 
                                  <input type="submit" value="送信">
                             </form>
 
 
+                    </div>
                 </div>
             </div>
 

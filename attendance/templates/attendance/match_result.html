@@ -4,33 +4,37 @@
 {% block content %}
 
         {% for key, value in dicts.items %}
-            <div class = "box">
-                <div class = "tytlebox">
-                    <p>{{key}}</p>
-                </div>
-                <div class = "contentbox">
-                   {% for x,y in value.items %}
-                    <div class="card">
-                        <div class="card-header text-center">{{x}}</div>
+<!--            <div class = "box">-->
+<!--                <div class = "tytlebox">-->
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <p>{{key}}</p>
+                    </div>
+                    <div class = "contentbox">
+                       {% for x,y in value.items %}
+                        <div class="card">
+                            <div class="card-header text-center">{{x}}</div>
 
-                      <table clss="table-striped">
+                              <table clss="table-striped">
 <!--                          <tr>-->
 <!--                          <th>{{x}}</th>-->
 <!--                          </tr>-->
-                          <tr>
-                                <th class="text-center"　style="width:40%">{{y.team1}}</th>
-                                <th class="text-center"  style="width:20%">vs</th>
-                                <th class="text-center" style="width:40%">{{y.team2}}</th>
-                          </tr>
-                          <tr>
-                                <th class="text-center">{{y.point1}}</th>
-                                <th></th>
-                                <th class="text-center">{{y.point2}}</th>
+                                  <tr>
+                                        <th class="text-center"　style="width:40%">{{y.team1}}</th>
+                                        <th class="text-center"  style="width:20%">vs</th>
+                                        <th class="text-center" style="width:40%">{{y.team2}}</th>
+                                  </tr>
+                                  <tr>
+                                        <th class="text-center">{{y.point1}}</th>
+                                        <th></th>
+                                        <th class="text-center">{{y.point2}}</th>
 
-                          </tr>
-                      </table>
-                    </div>
+                                  </tr>
+                              </table>
+                        </div>
                     {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endfor %}

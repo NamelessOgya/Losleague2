@@ -2,66 +2,118 @@
 {% load static %}
     {% block content %}
 
-<div class = "box">
-    <div class = "tytlebox">
+<div class="container">
+    <div class = "panel panel-default box">
+        <div class = "panel-heading tytlebox">
         <p>登録</p>
-    </div>
-    <div class = "contentbox">
+        </div>
+        <div class = "panel-body contentbox">
+            <form action="/attendance/{{date}}/result" methon="post">
+                {% csrf_token %}
+<!--                <div>-->
+<!--                    <label>一番手</label>-->
+<!--                    <select name="first" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="custom-select-1b">一番手</label>
+                    <select name="first" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-select-1b">二番手</label>
+                    <select name="second" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-select-1b">三番手</label>
+                    <select name="third" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-select-1b">四番手</label>
+                    <select name="fourth" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-select-1b">五番手</label>
+                    <select name="fifth" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-select-1b">補欠</label>
+                    <select name="hoketsu" value=""　class="custom-select">
+                        {% for member in team_member %}
+                        <option value = {{member}}>{{ member }}</option>
+                        {% endfor %}}
+                    </select>
+                </div>
 
-<form action="/attendance/{{date}}/result" methon="post">
-    {% csrf_token %}
-    <div>
-        <label>一番手</label>
-        <select name="first" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
+
+
+<!--                <div>-->
+<!--                    <label>二番手</label>-->
+<!--                    <select name="second" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label>三番手</label>-->
+<!--                    <select name="third" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label>四番手</label>-->
+<!--                    <select name="fourth" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label>五番手</label>-->
+<!--                    <select name="fifth" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <label>補欠</label>-->
+<!--                    <select name="hoketsu" value="">-->
+<!--                        {% for member in team_member %}-->
+<!--                        <option value = {{member}}>{{ member }}</option>-->
+<!--                        {% endfor %}}-->
+<!--                    </select>-->
+<!--                </div>-->
+                 <input type="submit" value="送信" class="btn btn-primary">
+            </form>
+        </div>
     </div>
-    <div>
-        <label>二番手</label>
-        <select name="second" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
-    </div>
-    <div>
-        <label>三番手</label>
-        <select name="third" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
-    </div>
-    <div>
-        <label>四番手</label>
-        <select name="fourth" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
-    </div>
-    <div>
-        <label>五番手</label>
-        <select name="fifth" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
-    </div>
-    <div>
-        <label>補欠</label>
-        <select name="hoketsu" value="">
-            {% for member in team_member %}
-            <option value = {{member}}>{{ member }}</option>
-            {% endfor %}}
-        </select>
-    </div>
-     <input type="submit" value="送信">
-</form>
-    </div>
-            </div>
+</div>
 
 
 
