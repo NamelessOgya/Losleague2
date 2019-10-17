@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.context_processors import csrf
 import threading
 from threading import Thread
-
+from django.contrib.auth.decorators import user_passes_test
 from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -558,3 +558,37 @@ def match_result(request):
 
 def schedule(request):
     return render(request,'attendance/schedule.html')
+
+@user_passes_test(lambda u: u.is_superuser)
+def check(request):
+    t = Table.objects.filter(season=season()).filter(date=Match.objects.all().order_by('-pk').first())
+
+    dic = {}
+    c = 0
+    for x in t:
+        c+=1
+        try:
+            r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
+            order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
+        except AttributeError:
+            order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+
+        try:
+            r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
+            order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
+        except AttributeError:
+            order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+
+        first = ["一番手", order1[0], order2[0]]
+        second = ["二番手", order1[1], order2[1]]
+        third = ["三番手", order1[2], order2[2]]
+        fourth = ["四番手", order1[3], order2[3]]
+        fifth=["五番手", order1[4], order2[4]]
+        hoketsu=["補欠", order1[5], order2[5]]
+        dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
+
+
+
+    return render(request, 'attendance/table.html', {'dic': dic})
+
+

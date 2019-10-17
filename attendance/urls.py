@@ -11,6 +11,7 @@ urlpatterns = [
     path('report_date/report/<str:date>/', views.report),
     path('report_date/report/<str:date>/result', views.report_register),
     path('report_date/', views.reportdate),
-    path('match_result', views.match_result)
+    path('match_result', views.match_result),
+    path('check', views.check)
 
 ]
