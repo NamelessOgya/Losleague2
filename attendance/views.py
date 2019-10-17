@@ -118,13 +118,13 @@ def list(request, date):
             r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
             order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
         except AttributeError:
-            order1 = ["未提出", "未提出", "未提出", "未提出", "未提出", "未提出"]
+            order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
         try:
             r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
             order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
         except AttributeError:
-            order2 = ["未提出", "未提出", "未提出", "未提出", "未提出", "未提出"]
+            order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
         first = ["一番手", order1[0], order2[0]]
         second = ["二番手", order1[1], order2[1]]
@@ -516,23 +516,45 @@ def report_register(request, date):
     return render(request, 'attendance/report_request.html')
 
 def match_result(request):
+    # dicts = {}
+    # dic = {}
+    # for m in Match.objects.all().filter(season=season()):
+    #         for t in Table.objects.filter(date=m):
+    #             try:
+    #                 point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
+    #                 team1 = t.team1.team_name
+    #                 point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
+    #                 team2 = t.team2.team_name
+    #                 dic[team1+" vs "+team2] = {"team1": team1, "point1": point1,"team2":team2,"point2": point2}
+    #             except AttributeError:
+    #                 pass
+    #         date = strdate(m.match_date)
+    #         dicts[date] = dic
+    #         dic = {}
+    #
+    # return render(request, 'attendance/match_result.html', {'dicts': dicts})
     dicts = {}
     dic = {}
     for m in Match.objects.all().filter(season=season()):
             for t in Table.objects.filter(date=m):
                 try:
                     point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
-                    team1 = t.team1.team_name
-                    point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
-                    team2 = t.team2.team_name
-                    dic[team1+" vs "+team2] = {"team1": team1, "point1": point1,"team2":team2,"point2": point2}
                 except AttributeError:
-                    pass
+                    point1 = "###未登録###"
+                try:
+                    point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
+                except AttributeError:
+                    point2 = "###未登録###"
+                team1 = t.team1.team_name
+                team2 = t.team2.team_name
+                dic[team1+" vs "+team2] = {"team1": team1, "point1": point1,"team2":team2,"point2": point2}
+
             date = strdate(m.match_date)
             dicts[date] = dic
             dic = {}
 
     return render(request, 'attendance/match_result.html', {'dicts': dicts})
+
 
 def schedule(request):
     return render(request,'attendance/schedule.html')
