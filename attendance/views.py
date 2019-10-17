@@ -545,9 +545,21 @@ def match_result(request):
                     point2 = TeamResult.objects.filter(date=m, team=t.team2.team_name).order_by("-pk").first().point
                 except AttributeError:
                     point2 = "###未登録###"
+
+                e=0
+                try:
+                    sum = point1+point2
+                    if sum ==5:
+                        pass
+                    else:
+                        e=1
+                except TypeError:
+                    pass
+
+
                 team1 = t.team1.team_name
                 team2 = t.team2.team_name
-                dic[team1+" vs "+team2] = {"team1": team1, "point1": point1,"team2":team2,"point2": point2}
+                dic[team1+" vs "+team2] = {"team1": team1, "point1": point1,"team2":team2,"point2": point2, "error": e}
 
             date = strdate(m.match_date)
             dicts[date] = dic
