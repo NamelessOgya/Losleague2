@@ -562,7 +562,7 @@ def schedule(request):
 @user_passes_test(lambda u: u.is_superuser)
 def check(request):
     t = Table.objects.filter(season=season()).filter(date=Match.objects.all().order_by('-pk').first())
-
+    m = strdate(Match.objects.all().order_by('-pk').first().match_date)
     dic = {}
     c = 0
     for x in t:
@@ -586,9 +586,9 @@ def check(request):
         fifth=["五番手", order1[4], order2[4]]
         hoketsu=["補欠", order1[5], order2[5]]
         dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
+    largedict = {m: dic}
 
 
-
-    return render(request, 'attendance/table.html', {'dic': dic})
+    return render(request, 'attendance/check.html', {'largedict': largedict})
 
 
