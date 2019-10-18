@@ -554,7 +554,7 @@ def match_result(request):
                     else:
                         e=1
                 except TypeError:
-                    pass
+                    e=1
 
 
                 team1 = t.team1.team_name
