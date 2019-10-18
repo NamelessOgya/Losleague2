@@ -535,7 +535,7 @@ def match_result(request):
     # return render(request, 'attendance/match_result.html', {'dicts': dicts})
     dicts = {}
     dic = {}
-    for m in Match.objects.all().filter(season=season()):
+    for m in Match.objects.all().filter(season=season()).order_by("pk"):
             for t in Table.objects.filter(date=m):
                 try:
                     point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
