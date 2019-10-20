@@ -15,7 +15,7 @@ from .models import Match, Player, Team, Registered, Table, Reported, PlayerResu
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def leader():
-    return ["エルフ","ロイヤル", "ウィッチ", "ドラゴン", "ヴァンパイア", "ネクロマンサー", "ビショップ", "ネメシス"]
+    return ["不戦勝/不戦敗","エルフ","ロイヤル", "ウィッチ", "ドラゴン", "ヴァンパイア", "ネクロマンサー", "ビショップ", "ネメシス"]
 
 def season():
     s = Season.objects.order_by('-pk').first()
@@ -480,8 +480,8 @@ def report_register(request, date):
                                     c = ClassWinRate.objects.filter(season=season()).filter(leader="ウィッチ").get()
                                     c.lose += 1
                                     c.save()
-
-                            else:
+                            elif pr.leader == "ネクロマンサー":
+                            # else:
                                 if pr.wl == "win":
                                     p.nc_win += 1
                                     p.win += 1
@@ -497,6 +497,8 @@ def report_register(request, date):
                                     c = ClassWinRate.objects.filter(season=season()).filter(leader="ネクロマンサー").get()
                                     c.lose += 1
                                     c.save()
+                            else:
+                                pass
 
                 except AttributeError:
                         pass
