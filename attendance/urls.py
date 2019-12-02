@@ -13,6 +13,7 @@ urlpatterns = [
     path('report_date/', views.reportdate),
     path('match_result', views.match_result),
     path('check', views.check),
-    path('update', views.update)
+    path('update', views.update),
+    path('final', views.final),
 
 ]

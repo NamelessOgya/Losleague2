@@ -11,7 +11,7 @@ from django.template.context_processors import csrf
 import threading
 from threading import Thread
 from django.contrib.auth.decorators import user_passes_test
-from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season
+from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def leader():
@@ -71,6 +71,13 @@ def user (request):
 
 def logout(request):
     return render(request, 'logout.html')
+
+def final(request):
+    t = Tournament.objects.all().filter(season=season()).get()
+    dic = {"team1": t.team1, "team2": t.team2, "team3": t.team3, "team4": t.team4, "team5": t.team5, "team6": t.team6, "team7": t.team7, "team8": t.team8,
+           "quauter1": t.quauter1, "quauter2": t.quauter2, "quauter3":t.quauter3, "quauter4": t.quauter4,
+           "semi1": t.semi1, "semi2": t.semi2,"winner": t.winner, "season": t.season}
+    return render(request, 'attendance/final.html', {"dic": dic})
 
 def listdate(request):
         m = Match.objects.all().filter(season=season()).filter(match_table_release=True)

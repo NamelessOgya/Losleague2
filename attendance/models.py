@@ -138,6 +138,27 @@ class Season(models.Model):
     def __str__(self):
         return "現在のシーズン"
 
+class Tournament(models.Model):
+    team1 = models.CharField(max_length=100, default="-")
+    team2 = models.CharField(max_length=100, default="-")
+    team3 = models.CharField(max_length=100, default="-")
+    team4 = models.CharField(max_length=100, default="-")
+    team5 = models.CharField(max_length=100, default="-")
+    team6 = models.CharField(max_length=100, default="-")
+    team7 = models.CharField(max_length=100, default="-")
+    team8 = models.CharField(max_length=100, default="-")
+
+    quauter1 = models.CharField(max_length=100, default="-")
+    quauter2 = models.CharField(max_length=100, default="-")
+    quauter3 = models.CharField(max_length=100, default="-")
+    quauter4 = models.CharField(max_length=100, default="-")
+    semi1 = models.CharField(max_length=100, default="-")
+    semi2 = models.CharField(max_length=100, default="-")
+
+    winner = models.CharField(max_length=100, default="-")
+    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
+
+
 
 
 

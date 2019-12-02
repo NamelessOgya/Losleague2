@@ -1,5 +1,4 @@
 
-
 .nv{
 background-color: #00072C;
 }
@@ -116,4 +115,33 @@ table {
   table-layout: fixed;
   word-break: break-all;
   word-wrap: break-word;
+}
+
+.teambox{
+    background-color:#00072C;
+    border-style:solid;
+    border-radius: 2px;
+    margin:0px;
+    padding: auto;
+    text-align: center;
+}
+
+
+.team{
+    background-color:whitesmoke;
+    margin:auto;
+    text-align:center;
+    width:100%;
+    height:100%;
+}
+
+.down
+{
+    border-top-style:groove;
+    border-right-style:groove;
+}
+.up
+{
+    border-bottom-style:groove;
+    border-right-style:groove;
 }
