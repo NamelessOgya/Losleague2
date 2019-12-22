@@ -879,6 +879,13 @@ def update2(request):
         p.nc_win = 0
         p.nc_lose = 0
         p.save()
+    # ClassWinRateの初期化
+    for c in ClassWinRate.objects.all().filter(season=season()):
+        c.win = 0
+        c.lose = 0
+        c.rate = 0
+        c.total = 0
+        c.save()
 
     for m in Match.objects.all().filter(season=season()):
         for p in Player.objects.all().filter(season=season()):
@@ -1029,14 +1036,6 @@ def update2(request):
     return render(request, 'attendance/report_request.html')
 
 def update3(request):
-    # ClassWinRateの初期化
-    for c in ClassWinRate.objects.all().filter(season=season()):
-        c.win = 0
-        c.lose = 0
-        c.rate = 0
-        c.total = 0
-        c.save()
-
     for c in ClassWinRate.objects.all().filter(season=season()):
        try:
             total = c.win+c.lose
@@ -1047,7 +1046,7 @@ def update3(request):
        except   ZeroDivisionError:
            pass
 
-       return render(request, 'attendance/report_request.html')
+
     return render(request, 'attendance/report_request.html')
 
 
