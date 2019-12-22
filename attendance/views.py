@@ -881,14 +881,18 @@ def update2(request):#プレイヤー勝敗数の集計
         p.save()
 
     for m in Match.objects.all().filter(season=season()):
-        for p in Player.objects.all().filter(season=season()):
-                    pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
-                    if pr.wl == "win":
-                        p.win += 1
-                        p.save()
-                    else:
-                        p.lose += 1
-                        p.save()
+        try:
+            for p in Player.objects.all().filter(season=season()):
+                pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
+                if pr.wl == "win":
+                    p.win += 1
+                    p.save()
+                else:
+                    p.lose += 1
+                    p.save()
+        except AttributeError:
+            pass
+
 
     return render(request, 'attendance/report_request.html')
 
