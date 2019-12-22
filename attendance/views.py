@@ -37,14 +37,14 @@ def home(request):
     dic3 = {}
     dic4 = {}
 #get top5 teams
-    for t in Team.objects.all().filter(season=season()).order_by('-grosspoint')[:5]:
+    for t in Team.objects.all().filter(season=season()).order_by('-grosspoint')[:10]:
 
         name = t.team_name
         point = t.point
         grosspoint = t.grosspoint
         dic1[name] = {"name": name, "point": point, "grosspoint": grosspoint}
 # 勝利数トップ5を抽出
-    for p in Player.objects.all().filter(season=season()).order_by('-win')[:5]:
+    for p in Player.objects.all().filter(season=season()).order_by('-win')[:10]:
 
         name = p.player_name
         win = p.win
