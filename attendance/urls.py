@@ -14,8 +14,8 @@ urlpatterns = [
     path('match_result', views.match_result),
     path('check', views.check),
     path('update', views.update),
-    path('update2', views.update),
-    path('update3', views.update),
+    path('update2', views.update2),
+    path('update3', views.update3),
     path('final', views.final),
 
 ]

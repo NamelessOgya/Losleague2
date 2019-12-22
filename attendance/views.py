@@ -1040,13 +1040,10 @@ def update3(request):
        try:
             total = c.win+c.lose
             c.rate = c.win/total*100
-            c.total = c.win + c.lose
+            c.total = total
             c.save()
-
        except   ZeroDivisionError:
            pass
-
-
     return render(request, 'attendance/report_request.html')
 
 
