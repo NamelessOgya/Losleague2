@@ -827,7 +827,7 @@ def check(request):
 #
 #     return render(request, 'attendance/report_request.html')
 
-def update(request):
+def update(request):#チームポイントの集計
     #Playerポイントの初期化
     for t in Team.objects.all().filter(season=season()):
         t.point = 0
@@ -858,7 +858,7 @@ def update(request):
 
 
 
-def update2(request):
+def update2(request):#プレイヤー勝敗数の集計
     for p in Player.objects.all().filter(season=season()):
         p.win = 0
         p.lose = 0
@@ -879,7 +879,21 @@ def update2(request):
         p.nc_win = 0
         p.nc_lose = 0
         p.save()
-    # ClassWinRateの初期化
+
+    for m in Match.objects.all().filter(season=season()):
+        for p in Player.objects.all().filter(season=season()):
+                    pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
+                    if pr.wl == "win":
+                        p.win += 1
+                        p.save()
+                    else:
+                        p.lose += 1
+                        p.save()
+
+    return render(request, 'attendance/report_request.html')
+
+
+def update3(request):#クラス勝率の計算
     for c in ClassWinRate.objects.all().filter(season=season()):
         c.win = 0
         c.lose = 0
@@ -887,24 +901,43 @@ def update2(request):
         c.total = 0
         c.save()
 
+    for p in Player.objects.all().filter(season=season()):
+        p.e_win = 0
+        p.e_lose = 0
+        p.nm_win = 0
+        p.nm_lose = 0
+        p.d_win = 0
+        p.d_lose = 0
+        p.b_win = 0
+        p.b_lose = 0
+        p.r_win = 0
+        p.r_lose = 0
+        p.v_win = 0
+        p.v_lose = 0
+        p.w_win = 0
+        p.w_lose = 0
+        p.nc_win = 0
+        p.nc_lose = 0
+        p.save()
+
     for m in Match.objects.all().filter(season=season()):
         for p in Player.objects.all().filter(season=season()):
             try:
                     pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
                     if pr.leader=="エルフ":
                         if pr.wl == "win":
-                            p.e_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.e_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="エルフ").get()
                             c.win += 1
                             c.save()
 
 
                         else:
-                            p.e_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.e_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="エルフ").get()
                             c.lose += 1
                             c.save()
@@ -912,119 +945,119 @@ def update2(request):
 
                     elif pr.leader == "ネメシス":
                         if pr.wl == "win":
-                            p.nm_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.nm_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ネメシス").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.nm_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.nm_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ネメシス").get()
                             c.lose += 1
                             c.save()
 
                     elif pr.leader == "ドラゴン":
                         if pr.wl == "win":
-                            p.d_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.d_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ドラゴン").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.d_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.d_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ドラゴン").get()
                             c.lose += 1
                             c.save()
 
                     elif pr.leader == "ビショップ":
                         if pr.wl == "win":
-                            p.b_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.b_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ビショップ").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.b_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.b_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ビショップ").get()
                             c.lose += 1
                             c.save()
 
                     elif pr.leader == "ロイヤル":
                         if pr.wl == "win":
-                            p.r_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.r_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ロイヤル").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.r_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.r_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ロイヤル").get()
                             c.lose += 1
                             c.save()
 
                     elif pr.leader == "ヴァンパイア":
                         if pr.wl == "win":
-                            p.v_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.v_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ヴァンパイア").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.v_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.v_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ヴァンパイア").get()
                             c.lose += 1
                             c.save()
 
                     elif pr.leader == "ウィッチ":
                         if pr.wl == "win":
-                            p.w_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.w_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ウィッチ").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.w_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.w_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ウィッチ").get()
                             c.lose += 1
                             c.save()
                     elif pr.leader == "ネクロマンサー":
                     # else:
                         if pr.wl == "win":
-                            p.nc_win += 1
-                            p.win += 1
-                            p.save()
+                            # p.nc_win += 1
+                            # p.win += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ネクロマンサー").get()
                             c.win += 1
                             c.save()
 
                         else:
-                            p.nc_lose += 1
-                            p.lose += 1
-                            p.save()
+                            # p.nc_lose += 1
+                            # p.lose += 1
+                            # p.save()
                             c = ClassWinRate.objects.filter(season=season()).filter(leader="ネクロマンサー").get()
                             c.lose += 1
                             c.save()
@@ -1033,9 +1066,7 @@ def update2(request):
 
             except AttributeError:
                     pass
-    return render(request, 'attendance/report_request.html')
 
-def update3(request):
     for c in ClassWinRate.objects.all().filter(season=season()):
        try:
             total = c.win+c.lose
@@ -1045,5 +1076,4 @@ def update3(request):
        except   ZeroDivisionError:
            pass
     return render(request, 'attendance/report_request.html')
-
 
