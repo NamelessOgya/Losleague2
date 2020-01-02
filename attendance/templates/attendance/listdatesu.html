@@ -1,0 +1,38 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+
+<!--            <div class = "box">-->
+<!--                <div class = "tytlebox">-->
+<!--                    <p>マッチング試合日を選択</p>-->
+<!--                </div>-->
+<!--                <div class = "contentbox">-->
+<!--                    <ul>-->
+<!--                        {%  for key, value in dic.items %}-->
+<!--                        <li><a href = matchlist/{{ key }}/> {{ value }} </a></li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <a class="p-2 mb-3">マッチング試合日を選択</a>
+                    </div>
+                    <div class = "panel-body　contentbox">
+                        <ul>
+                            {%  for key, value in dic.items %}
+                            <li><a href = "matchlistsu/{{ key }}/"> {{ value }} </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+{% endblock %}
+</html>

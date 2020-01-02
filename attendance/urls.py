@@ -8,6 +8,7 @@ urlpatterns = [
     path('match_list', views.listdate),
     path('<str:date>/result', views.result, name='result'),
     path('matchlist/<str:date>/', views.list),
+    path('matchlistsu/<str:date>/', views.listsu),
     path('report_date/report/<str:date>/', views.report),
     path('report_date/report/<str:date>/result', views.report_register),
     path('report_date/', views.reportdate),

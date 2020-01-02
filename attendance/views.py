@@ -124,34 +124,31 @@ def listdate(request):
 #     return render(request, 'attendance/table.html', {'dic': dic})
 
 def list(request, date):
-    t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
+    if Match.objects.filter(pk=date).get().match_table_release == True:
+        t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
+        dic = {}
+        c = 0
+        for x in t:
+            c+=1
+            try:
+                r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
+                order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
+            except AttributeError:
+                order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
-    dic = {}
-    c = 0
-    for x in t:
-        c+=1
-        try:
-            r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
-            order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
-        except AttributeError:
-            order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+            try:
+                r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
+                order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
+            except AttributeError:
+                order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
-        try:
-            r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
-            order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
-        except AttributeError:
-            order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
-
-        first = ["一番手", order1[0], order2[0]]
-        second = ["二番手", order1[1], order2[1]]
-        third = ["三番手", order1[2], order2[2]]
-        fourth = ["四番手", order1[3], order2[3]]
-        fifth=["五番手", order1[4], order2[4]]
-        hoketsu=["補欠", order1[5], order2[5]]
-        dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
-
-
-
+            first = ["一番手", order1[0], order2[0]]
+            second = ["二番手", order1[1], order2[1]]
+            third = ["三番手", order1[2], order2[2]]
+            fourth = ["四番手", order1[3], order2[3]]
+            fifth=["五番手", order1[4], order2[4]]
+            hoketsu=["補欠", order1[5], order2[5]]
+            dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
     return render(request, 'attendance/table.html', {'dic': dic})
 
 
@@ -1136,5 +1133,46 @@ class PasswordChange(LoginRequiredMixin, PasswordChangeView):
         context["form_name"] = "password_change"
         return context
 
-def PasswordChangeDone(request):
-    return render(request, 'attendance/password_change_done.html')
+@user_passes_test(lambda u: u.is_superuser)
+def check(request):
+    m = Match.objects.all().filter(season=season()).all()
+    dic = {}
+    for x in m:
+        id = x.id
+        d = x.match_date
+
+        dic[id] = strdate(d)
+
+    context = {'dic': dic}
+
+    return render(request, 'attendance/listdatesu.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def listsu(request, date):
+        t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
+        dic = {}
+        c = 0
+        for x in t:
+            c+=1
+            try:
+                r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
+                order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
+            except AttributeError:
+                order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+
+            try:
+                r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
+                order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
+            except AttributeError:
+                order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+
+            first = ["一番手", order1[0], order2[0]]
+            second = ["二番手", order1[1], order2[1]]
+            third = ["三番手", order1[2], order2[2]]
+            fourth = ["四番手", order1[3], order2[3]]
+            fifth=["五番手", order1[4], order2[4]]
+            hoketsu=["補欠", order1[5], order2[5]]
+            dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
+        return render(request, 'attendance/table.html', {'dic': dic})
+
+
