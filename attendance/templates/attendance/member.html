@@ -1,0 +1,33 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+
+<!--            <div class = "box">-->
+<!--                <div class = "tytlebox">-->
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <a class="p-2 mb-3">メンバー戦績</a>
+                    </div>
+                    <div class = "panel-body contentbox">
+                        <div class="card">
+                            <div class="card-header">{{user.username}}</div>
+                                <table class = "table">
+
+                                {% for k in dic %}
+                                    <tr>
+                                {% for s in k %}
+                                        <th>{{s}}</th>
+                                {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                                </table>
+                            <div class = "container"><button type="button" class = "btn btn-primary" href = /accounts/logout/>logout</button></div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+</html>

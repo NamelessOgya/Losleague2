@@ -1174,5 +1174,13 @@ def listsu(request, date):
             hoketsu=["補欠", order1[5], order2[5]]
             dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
         return render(request, 'attendance/table.html', {'dic': dic})
+@login_required
+def member(request):
+    p = Player.objects.filter(team = Team.objects.filter(team_name=request.user).get()).order_by("win")
+    li = []
+    for q in p:
+        li.append([q.player_name, q.win, q.lose])
+    return render(request, 'attendance/member.html', {'dic': li})
+
 
 
