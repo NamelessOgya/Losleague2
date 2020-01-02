@@ -148,3 +148,10 @@ table {
     border-bottom-style:groove;
     border-right-style:groove;
 }
+.iconzone{
+    padding:0
+}
+.icon{
+    height: 23px;
+    width: 33px;
+}

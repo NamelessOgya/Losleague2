@@ -25,6 +25,7 @@
                      <p>トップ10のみ表示</p>
                      <table class = "table">
                          <tr>
+                             <th></th>
                              <th>チーム名</th>
                              <th>チーム戦勝利数</th>
                              <th>個人勝利数</th>
@@ -32,6 +33,15 @@
 
                      {% for key, value in dic1.items %}
                             <tr>
+                                {% if forloop.counter == 1 %}
+                                    <th><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th>
+                                {%elif forloop.counter == 2 %}
+                                <th><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th>
+                                {%elif forloop.counter == 3 %}
+                                <th><div class = "container"><img class = "icon" src = {% static "third.png" %} ></div></th>
+                                {%else %}
+                                <th>{{forloop.counter}}</th>
+                                {% endif %}
                                 {% for x, y in value.items %}
                                 <th class="c-txtsp">
                                  {{ y }}
@@ -49,6 +59,7 @@
                         <a style="color:red;"></a>
                         <table class="table">
                                  <tr>
+                                     <th></th>
                                      <th>名前</th>
                                      <th>勝利数</th>
                                      <th>敗北数</th>
@@ -56,6 +67,17 @@
 
                              {% for key, value in dic2.items %}
                                     <tr>
+                                        {% if forloop.counter == 1 %}<th><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th>
+                                        {%elif forloop.counter == 2 %}
+                                        <th><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th>
+                                        {%elif forloop.counter == 3 %}
+                                        <th><div class = "container"><img class = "icon" src = {% static "third.png" %} ></div></th>
+                                        {%else %}
+                                        <th><div class = "container">{{forloop.counter}}位</div></th>
+                                        {% endif %}
+
+
+
                                         {% for x, y in value.items %}
                                         <th class="c-txtsp">
                                          {{ y }}
