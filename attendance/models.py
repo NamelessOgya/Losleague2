@@ -5,8 +5,9 @@ from django.db import models
 
 class Team(models.Model):
     team_name = models.CharField(max_length=100)
-    point = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
-    grosspoint = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
+    point = models.IntegerField(verbose_name='勝ち点', blank=True, null=True, default=0)
+    grosspoint = models.IntegerField(verbose_name='得点差(ペナルティ除く)', blank=True, null=True, default=0)
+    penalty = models.IntegerField(verbose_name='ペナルティ(正の数でつけてください)', blank=True, null=True, default=0)
     season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
 
@@ -16,8 +17,8 @@ class Team(models.Model):
 class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     player_name = models.CharField(max_length=100)
-    win = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
-    lose = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
+    win = models.IntegerField(verbose_name='win', blank=True, null=True, default=0)
+    lose = models.IntegerField(verbose_name='lose', blank=True, null=True, default=0)
     e_win = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     e_lose = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     nm_win = models.IntegerField(verbose_name='', blank=True, null=True, default=0)

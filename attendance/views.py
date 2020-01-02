@@ -46,11 +46,11 @@ def home(request):
     dic3 = {}
     dic4 = {}
 #get top5 teams
-    for t in Team.objects.all().filter(season=season()).order_by('-grosspoint')[:10]:
+    for t in Team.objects.all().filter(season=season()).order_by('-point')[:10]:
 
         name = t.team_name
         point = t.point
-        grosspoint = t.grosspoint
+        grosspoint = t.grosspoint-t.penalty
         dic1[name] = {"name": name, "point": point, "grosspoint": grosspoint}
 # 勝利数トップ5を抽出
     for p in Player.objects.all().filter(season=season()).order_by('-win')[:10]:
@@ -853,9 +853,9 @@ def update(request):#チームポイントの集計
                     x2 = Team.objects.filter(team_name=team2).order_by("-pk").first()
                     x2.grosspoint += point2
                     if point1 >= 3:
-                        x1.point += 1
+                        x1.point += 3
                     else:
-                        x2.point += 1
+                        x2.point += 3
                     x1.save()
                     x2.save()
             except AttributeError:
