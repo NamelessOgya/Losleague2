@@ -11,7 +11,7 @@ from django.template.context_processors import csrf
 import threading
 from threading import Thread
 from django.contrib.auth.decorators import user_passes_test
-from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament
+from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def leader():
@@ -1080,4 +1080,46 @@ def update3(request):#クラス勝率の計算
        except   ZeroDivisionError:
            pass
     return render(request, 'attendance/report_request.html')
+
+def past(request):#過去の戦績の参照
+    dict = {}
+    for p in Past.objects.all():
+        dic ={}
+
+        dic["team1"] = p.team1
+        dic["team2"] = p.team2
+        dic["team3"] = p.team3
+        dic["team4"] = p.team4
+        dic["team5"] = p.team5
+        dic["team6"] = p.team6
+
+        dic["player1"] = p.player1
+        dic["r1"]  = p.r1
+        dic["player2"] = p.player2
+        dic["r2"]  = p.r2
+        dic["player3"] = p.player3
+        dic["r3"]  = p.r3
+        dic["player4"] = p.player4
+        dic["r4"] = p.r4
+        dic["player5"] = p.player5
+        dic["r5"]  = p.r5
+        dic["player6"]  = p.player6
+        dic["r6"]  = p.r6
+        dic["player7"] = p.player7
+        dic["r7"]  = p.r7
+        dic["player8"] = p.player8
+        dic["r8"]  = p.r8
+        dic["player9"] = p.player9
+        dic["r9"]  = p.r9
+        dic["player10"] = p.player10
+        dic["r10"]  = p.r10
+        dict[p.season]=dic
+
+    return render(request, 'attendance/past.html', {"dict":dict})
+
+
+
+
+
+
 

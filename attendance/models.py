@@ -158,7 +158,34 @@ class Tournament(models.Model):
     winner = models.CharField(max_length=100, default="-")
     season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
-
+class Past(models.Model):
+    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
+    team1 = models.CharField(max_length=100, default="-")
+    team2 = models.CharField(max_length=100, default="-")
+    team3 = models.CharField(max_length=100, default="-")
+    team4 = models.CharField(max_length=100, default="-")
+    team5 = models.CharField(max_length=100, default="-")
+    team6 = models.CharField(max_length=100, default="-")
+    player1 = models.CharField(max_length=100, default="-")
+    r1= models.CharField(max_length=100, default="-")
+    player2 = models.CharField(max_length=100, default="-")
+    r2= models.CharField(max_length=100, default="-")
+    player3 = models.CharField(max_length=100, default="-")
+    r3 = models.CharField(max_length=100, default="-")
+    player4 = models.CharField(max_length=100, default="-")
+    r4 = models.CharField(max_length=100, default="-")
+    player5 = models.CharField(max_length=100, default="-")
+    r5 = models.CharField(max_length=100, default="-")
+    player6 = models.CharField(max_length=100, default="-")
+    r6 =  models.CharField(max_length=100, default="-")
+    player7 = models.CharField(max_length=100, default="-")
+    r7 = models.CharField(max_length=100, default="-")
+    player8 = models.CharField(max_length=100, default="-")
+    r8 = models.CharField(max_length=100, default="-")
+    player9 = models.CharField(max_length=100, default="-")
+    r9 = models.CharField(max_length=100, default="-")
+    player10 = models.CharField(max_length=100, default="-")
+    r10 = models.CharField(max_length=100, default="-")
 
 
 

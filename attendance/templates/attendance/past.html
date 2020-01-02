@@ -1,0 +1,92 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <p>table</p>
+                    </div>
+                    <div class = "contentbox">
+                        {% for key, value in dict.items %}
+                                 <div class="card">
+                                 <div class="card-header">LOSリーグシーズン{{key}}</div>
+                                    <table class = "table">
+                                        <tr>
+                                            <th>優勝</th><th>{{ value.team1 }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>準優勝</th><th>{{ value.team2 }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ベスト4</th><th>{{ value.team3 }},{{value.team4}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ベスト8</th><th>{{ value.team5 }},{{value.team6}}</th>
+                                        </tr>
+                                    </table><br>
+                                 </div>
+                                <div class="card">
+                                    <div class="card-header">LOSリーグシーズン{{key}}勝利数ランキング</div>
+                                        <table class = "table">
+                                            <tr>
+                                                <th>1位</th><th>{{ value.player1 }}</th><th>{{ value.r1 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>2位</th><th>{{ value.player2 }}</th><th>{{ value.r2 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>3位</th><th>{{ value.player3 }}</th><th>{{ value.r3 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>4位</th><th>{{ value.player4 }}</th><th>{{ value.r4 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>5位</th><th>{{ value.player5 }}</th><th>{{ value.r5 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>6位</th><th>{{ value.player6 }}</th><th>{{ value.r6 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>7位</th><th>{{ value.player7 }}</th><th>{{ value.r7 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>8位</th><th>{{ value.player8 }}</th><th>{{ value.r8 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>9位</th><th>{{ value.player9 }}</th><th>{{ value.r9 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>10位</th><th>{{ value.player10 }}</th><th>{{ value.r10 }}</th>
+                                            </tr>
+
+
+
+
+
+
+
+                                        </table>
+
+
+                                </div>
+
+
+
+                        {% endfor %}
+
+                            <a href = '/'>Back</a>
+
+                    </div>
+
+            </div>
+            </div>
+
+
+
+
+
+{% endblock %}
+</html>

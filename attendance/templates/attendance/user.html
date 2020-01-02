@@ -3,17 +3,19 @@
 {% load static %}
     {% block content %}
 
-
-            <div class = "box">
-                <div class = "tytlebox">
-                    <p>チーム{{user.username}}の登録画面</p>
-                </div>
-                <div class = "contentbox">
-                    <a href = '/attendance/index'>選手登録</a><br>
-                    <a href = '/attendance/report_date'>結果登録</a>
+    <div class="container">
+            <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <p>チーム{{user.username}}の登録画面</p>
+                    </div>
+                    <div class = "contentbox">
+                        <a href = '/attendance/index'>選手登録</a><br>
+                        <a href = '/attendance/report_date'>結果登録</a>
+                    </div>
                 </div>
             </div>
 
+    </div>
 
 {% endblock %}
 </html>

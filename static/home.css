@@ -22,18 +22,21 @@ color:white;
 
 
 .tabbutton{
- margin:10px;
-
+    margin:10px;
 }
 
 .box{
     backgroundcolor:black;
     border-style:solid;
     border-radius: 10px;
-    margin:15px;
     box-shadow: 2px 2px 4px;
     padding-left: 0;
     padding-right: 0;
+    max-width: 500px;
+    margin:auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
 }
 
 .tytlebox {

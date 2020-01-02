@@ -4,7 +4,9 @@
   <head>
     <!-- Required meta tags -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--        <script src="js/bootstrap.bundle.min.js"></script>-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>-->
 <!--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
         <link href="{% static 'home.css' %}" rel="stylesheet" type="text/css">
@@ -36,20 +38,23 @@
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
               <a class="nav-link" href=" /attendance/final">final<span class="sr-only">(現位置)</span></a>
-            </li>
+          </li>
 
-            <li class="nav-item active">
+          <li class="nav-item active">
               <a class="nav-link" href=" /schedule"> schedule<span class="sr-only">(現位置)</span></a>
-            </li>
-              <li class="nav-item active">
+          </li>
+          <li class="nav-item active">
               <a class="nav-link" href=" /attendance/match_result"> 試合結果<span class="sr-only">(現位置)</span></a>
-            </li>
-              <li class="nav-item active">
+          </li>
+          <li class="nav-item active">
               <a class="nav-link" href=" /attendance/match_list"> 対戦表<span class="sr-only">(現位置)</span></a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="  /attendance/past">過去の結果<span class="sr-only">(現位置)</span></a>
             </li>
-              <li class="nav-item active">
-              <a class="nav-link" href="  /accounts/login"> login<span class="sr-only">(現位置)</span></a>
-            </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="  /accounts/login">login<span class="sr-only">(現位置)</span></a>
+          </li>
       </ul>
     </div>
 </nav>

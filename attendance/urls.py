@@ -17,5 +17,6 @@ urlpatterns = [
     path('update2', views.update2),
     path('update3', views.update3),
     path('final', views.final),
+    path('past', views.past),
 
 ]

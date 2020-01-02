@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Team, Player, Match, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament
+from .models import Team, Player, Match, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past
 # Register your models here.
 class PlayerAdmin(admin.ModelAdmin):
     list_filter = ["team", "season"]
@@ -17,6 +17,9 @@ class PlayerResultAdmin(admin.ModelAdmin):
     list_filter = ["date"]
 
 
+class PlayerAdmin(admin.ModelAdmin):
+    list_filter = ["win"]
+
 
 admin.site.register(Team)
 admin.site.register(Player, PlayerAdmin)
@@ -30,6 +33,8 @@ admin.site.register(ClassWinRate)
 admin.site.register(Blog)
 admin.site.register(Season)
 admin.site.register(Tournament)
+admin.site.register(Past)
+
 
 
 
