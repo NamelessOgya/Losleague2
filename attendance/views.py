@@ -13,7 +13,16 @@ from threading import Thread
 from django.contrib.auth.decorators import user_passes_test
 from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+from django.shortcuts import render
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import generic
+from django.urls import reverse_lazy
 def leader():
     return ["不戦勝/不戦敗","エルフ","ロイヤル", "ウィッチ", "ドラゴン", "ヴァンパイア", "ネクロマンサー", "ビショップ", "ネメシス"]
 
@@ -1117,9 +1126,16 @@ def past(request):#過去の戦績の参照
 
     return render(request, 'attendance/past.html', {"dict":dict})
 
+class PasswordChange(LoginRequiredMixin, PasswordChangeView):
+    """パスワード変更ビュー"""
+    success_url = reverse_lazy('accounts:password_change_done')
+    template_name = 'attendance/password_change.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) # 継承元のメソッドCALL
+        context["form_name"] = "password_change"
+        return context
 
-
-
-
-
+class PasswordChangeDone(LoginRequiredMixin,PasswordChangeDoneView):
+    """パスワード変更完了"""
+    template_name = 'attendance/password_change_done.html'
