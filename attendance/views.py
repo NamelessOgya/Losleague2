@@ -1128,7 +1128,7 @@ def past(request):#過去の戦績の参照
 
 class PasswordChange(LoginRequiredMixin, PasswordChangeView):
     """パスワード変更ビュー"""
-    success_url = reverse_lazy('accounts:password_change_done')
+    success_url = reverse_lazy('user')
     template_name = 'attendance/password_change.html'
 
     def get_context_data(self, **kwargs):
@@ -1136,6 +1136,5 @@ class PasswordChange(LoginRequiredMixin, PasswordChangeView):
         context["form_name"] = "password_change"
         return context
 
-class PasswordChangeDone(LoginRequiredMixin,PasswordChangeDoneView):
-    """パスワード変更完了"""
-    template_name = 'attendance/password_change_done.html'
+def PasswordChangeDone(request):
+    return render(request, 'attendance/password_change_done.html')
