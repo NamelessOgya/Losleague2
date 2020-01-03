@@ -18,7 +18,7 @@ class PlayerResultAdmin(admin.ModelAdmin):
 
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_filter = ["win"]
+    list_filter = ["win","team"]
 
 
 admin.site.register(Team)
