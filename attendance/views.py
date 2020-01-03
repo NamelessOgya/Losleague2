@@ -170,8 +170,7 @@ def date(request, date):
     mylist = []
     for m in x.player_set.all():
         mylist.append(m.player_name)
-    new_list = list(reversed(mylist))
-    return render(request, 'attendance/date.html', {"date": date, "team_member": new_list})
+    return render(request, 'attendance/date.html', {"date": date, "team_member": mylist})
 @login_required
 def result(request, date):
     # フォーム送信された値を受け取る
