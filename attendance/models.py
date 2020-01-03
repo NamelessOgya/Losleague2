@@ -9,8 +9,7 @@ class Team(models.Model):
     grosspoint = models.IntegerField(verbose_name='得点差(ペナルティ除く)', blank=True, null=True, default=0)
     penalty = models.IntegerField(verbose_name='ペナルティ(正の数でつけてください)', blank=True, null=True, default=0)
     season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
-
-
+    gp = models.IntegerField(verbose_name='得点差-ペナルティ', blank=True, null=True, default=0)
     def __str__(self):
         return self.team_name
 

@@ -21,14 +21,17 @@
 <!--             上位チーム成績-->
                 <div class="tab-content">
                   <div id="home" class="tab-pane fade in active">
-
-                     <p>トップ10のみ表示。得失点差はペナルティも含む</p>
+                      <div class = "container">
+                     <p>勝ち点によって順位が決定</p>
+                      <p>勝ち点同点の場合得失点-ペナルティの値により決定</p>
+                      </div>
                      <table class = "table">
                          <tr>
                              <th></th>
                              <th>チーム名</th>
                              <th>勝ち点</th>
                              <th>得失点差</th>
+                             <th>ペルティ</th>
                          </tr>
 
                      {% for key, value in dic1.items %}
@@ -55,7 +58,9 @@
 
 <!--                個人成績上位者-->
                     <div id="menu1" class="tab-pane fade">
+                        <div class = "container">
                         <p>勝利数トップ10のみ表示</p>
+                        </div>
                         <a style="color:red;"></a>
                         <table class="table">
                                  <tr>
