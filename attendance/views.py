@@ -46,7 +46,7 @@ def home(request):
     dic3 = {}
     dic4 = {}
 #get top5 teams
-    for t in Team.objects.all().filter(season=season()).order_by('-point')[:10]:
+    for t in Team.objects.all().filter(season=season()).order_by('-point'):
 
         name = t.team_name
         point = t.point
