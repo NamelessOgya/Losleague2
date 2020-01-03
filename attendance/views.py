@@ -123,7 +123,7 @@ def listdate(request):
 #
 #     return render(request, 'attendance/table.html', {'dic': dic})
 
-def list(request, date):
+def listmake(request, date):
     if Match.objects.filter(pk=date).get().match_table_release == True:
         t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
         dic = {}
@@ -170,8 +170,8 @@ def date(request, date):
     mylist = []
     for m in x.player_set.all():
         mylist.append(m.player_name)
-
-    return render(request, 'attendance/date.html', {"date": date, "team_member": mylist})
+    new_list = list(reversed(mylist))
+    return render(request, 'attendance/date.html', {"date": date, "team_member": new_list})
 @login_required
 def result(request, date):
     # フォーム送信された値を受け取る

@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">一番手</label>
                     <select name="first" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">二番手</label>
                     <select name="second" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">三番手</label>
                     <select name="third" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">四番手</label>
                     <select name="fourth" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">五番手</label>
                     <select name="fifth" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label for="custom-select-1b">補欠</label>
                     <select name="hoketsu" value=""　class="custom-select">
-                        {% for member in team_member %}
+                        {% for member in team_member reversed %}
                         <option value = {{member}}>{{ member }}</option>
                         {% endfor %}}
                     </select>
