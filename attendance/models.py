@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.utils import timezone
 
 
 
@@ -58,7 +59,7 @@ class Registered(models.Model):
     fourth = models.CharField(max_length=100, default="")
     fifth = models.CharField(max_length=100, default="")
     hoketsu = models.CharField(max_length=100, default="")
-
+    regist_date = models.DateTimeField(default=timezone.now)
     def __str__(self):
             return str(self.date)+"/"+self.team
 

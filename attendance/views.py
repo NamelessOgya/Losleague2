@@ -23,6 +23,7 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.utils import timezone
 def leader():
     return ["不戦勝/不戦敗","エルフ","ロイヤル", "ウィッチ", "ドラゴン", "ヴァンパイア", "ネクロマンサー", "ビショップ", "ネメシス"]
 
@@ -184,7 +185,8 @@ def result(request, date):
     #データベースに変更を加えるぉ
     m = Match.objects.all().filter(season=season())
     match_instance = m.get(pk=int(date))
-    Registered.objects.create(date=match_instance, team=request.user, first=first, second=second, third=third, fourth= fourth, fifth=fifth, hoketsu=hoketsu)
+    time_now = timezone.now()
+    Registered.objects.create(date=match_instance, team=request.user, first=first, second=second, third=third, fourth= fourth, fifth=fifth, hoketsu=hoketsu, regist_date=time_now)
 
     r = Registered.objects.filter(team=request.user)
     m = Match.objects.all().filter(season=season())
