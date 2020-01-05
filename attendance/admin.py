@@ -14,7 +14,7 @@ class TableAdmin(admin.ModelAdmin):
     list_filter = ["date", "season"]
 
 class PlayerResultAdmin(admin.ModelAdmin):
-    list_filter = ["date"]
+    list_filter = ["date","player", "leader", "wl"]
 
 
 class PlayerAdmin(admin.ModelAdmin):

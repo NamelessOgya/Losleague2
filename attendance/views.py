@@ -919,24 +919,6 @@ def update3(request):#クラス勝率の計算
         c.total = 0
         c.save()
 
-    for p in Player.objects.all().filter(season=season()):
-        p.e_win = 0
-        p.e_lose = 0
-        p.nm_win = 0
-        p.nm_lose = 0
-        p.d_win = 0
-        p.d_lose = 0
-        p.b_win = 0
-        p.b_lose = 0
-        p.r_win = 0
-        p.r_lose = 0
-        p.v_win = 0
-        p.v_lose = 0
-        p.w_win = 0
-        p.w_lose = 0
-        p.nc_win = 0
-        p.nc_lose = 0
-        p.save()
 
     for m in Match.objects.all().filter(season=season()):
         for p in Player.objects.all().filter(season=season()):
