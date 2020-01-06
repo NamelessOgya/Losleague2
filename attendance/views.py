@@ -1172,5 +1172,3 @@ def member(request):
         li.append([q.player_name, q.win, q.lose])
     return render(request, 'attendance/member.html', {'dic': li})
 
-
-
