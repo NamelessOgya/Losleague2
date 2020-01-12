@@ -55,7 +55,7 @@ def home(request):
         penalty = t.penalty
         dic1[name] = {"name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
 # 勝利数トップ5を抽出
-    for p in Player.objects.all().filter(season=season()).order_by('-win')[:10]:
+    for p in Player.objects.all().filter(season=season()).order_by('-win','lose')[:10]:
 
         name = p.player_name
         win = p.win
