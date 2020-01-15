@@ -1139,7 +1139,13 @@ def check(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def listsu(request, date):
+        m = Match.objects.filter(pk=date).get()
+        if m.match_table_release == True:
+            table_release = "checked"
+        else:
+            table_release = ""
         t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
+        ldic = {}
         dic = {}
         c = 0
         for x in t:
@@ -1163,7 +1169,10 @@ def listsu(request, date):
             fifth=["五番手", order1[4], order2[4]]
             hoketsu=["補欠", order1[5], order2[5]]
             dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
-        return render(request, 'attendance/table.html', {'dic': dic})
+        ldic["dic"] = dic
+        ldic["table_release"] = table_release
+        ldic["date"] = date
+        return render(request, 'attendance/tablesu.html', {'ldic': ldic})
 @login_required
 def member(request):
     p = Player.objects.filter(team = Team.objects.filter(team_name=request.user).get()).order_by("win")
@@ -1171,4 +1180,23 @@ def member(request):
     for q in p:
         li.append([q.player_name, q.win, q.lose])
     return render(request, 'attendance/member.html', {'dic': li})
+
+@user_passes_test(lambda u: u.is_superuser, date)
+
+def release_changed(request, date):
+    m = Match.objects.filter(pk=date).get()
+    if request.GET["table_release"] == "on":
+        m.match_table_release = True
+        state = "公開"
+    else:
+        m.match_table_release = False
+        state = "非公開"
+
+    m.save()
+    dic = {}
+    dic["day"] = strdate(m.match_date)
+    dic["state"]= state
+
+
+    return render(request, 'attendance/release_changed.html', {"dic":dic})
 

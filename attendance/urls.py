@@ -20,5 +20,6 @@ urlpatterns = [
     path('final', views.final),
     path('past', views.past),
     path('member', views.member),
+    path('release_changed/<str:date>', views.release_changed)
 
 ]
