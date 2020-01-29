@@ -233,7 +233,7 @@ def report(request, date):
 @login_required
 def report_register(request, date):
 
-    team = request.user
+    team = request.user.username
     date = Match.objects.filter(season=season()).filter(pk=date).order_by('-pk').first()
 
     first = request.GET.get('first')
@@ -254,11 +254,11 @@ def report_register(request, date):
     fourthwl = request.GET.get('fourthwl')
     fifthwl = request.GET.get('fifthwl')
 
-    dics = [{"player": first, "leader": firstl, "winlose": firstwl},
-           {"player": second, "leader": secondl, "winlose": secondwl},
-           {"player": third, "leader": thirdl, "winlose": thirdwl},
-           {"player": fourth, "leader": fourthl, "winlose": fourthwl},
-           {"player": fifth, "leader": fifthl, "winlose": fifthwl}]
+    dics = [{"player": first, "leader": firstl, "winlose": firstwl,"team": team},
+           {"player": second, "leader": secondl, "winlose": secondwl,"team": team},
+           {"player": third, "leader": thirdl, "winlose": thirdwl,"team": team},
+           {"player": fourth, "leader": fourthl, "winlose": fourthwl,"team": team},
+           {"player": fifth, "leader": fifthl, "winlose": fifthwl,"team": team}]
 # レポートに登録
     Reported.objects.create(
     date=date,
@@ -291,7 +291,7 @@ def report_register(request, date):
 #PlayerResultとTeamResultに追加
     teamp = 0
     for d in dics:
-        PlayerResult.objects.create(date = date, player = Player.objects.filter(player_name=d["player"]).order_by('-pk').first(), leader = d["leader"], wl = d["winlose"])
+        PlayerResult.objects.create(date = date, player = Player.objects.filter(player_name=d["player"],team=Team.objects.all().filter(team_name=d["team"]).get()).order_by('-pk').first(), leader = d["leader"], wl = d["winlose"])
         if d["winlose"] == "win" :
             teamp+=1
 
