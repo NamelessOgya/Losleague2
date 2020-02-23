@@ -9,6 +9,7 @@ color:white;
 .iconpicture{
     height: 2rem;
     width: 2rem;
+    margin: auto;
 }
 .home{
     background-image: url("/static/los/home.jpg");

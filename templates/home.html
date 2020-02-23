@@ -26,14 +26,14 @@
                       <p>勝ち点同点の場合得失点-ペナルティの値により決定</p>
                       </div>
                      <table class = "table">
-                         <tr>
+                         <thread class = "active">
                              <th></th>
                              <th colspan="2">チーム名</th>
 
                              <th>勝ち点</th>
                              <th>得点</th>
-                             <th>ペナルティ</th>
-                         </tr>
+                             <th>減点</th>
+                         </thread>
 
                      {% for key, value in dic1.items %}
                             <tr>
@@ -58,7 +58,7 @@
                                 {% endfor %}
                             </tr>
                     {% endfor %}
-
+                         </tbody>
                      </table>
                   </div>
 
