@@ -52,7 +52,7 @@ def home(request):
         point = t.point
         grosspoint = t.grosspoint
         penalty = t.penalty
-        dic1[name] = {"name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
+        dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
 # 勝利数トップ10を抽出
     for p in Player.objects.all().filter(season=season()).order_by('-win','lose')[:10]:
         name = p.player_name

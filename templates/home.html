@@ -18,7 +18,7 @@
                 <li class="tabbutton"><a data-toggle="tab" href="#menu2">クラス別</a></li>
             </ul>
 
-<!--             上位チーム成績-->
+<!--             チーム成績-->
                 <div class="tab-content">
                   <div id="home" class="tab-pane fade in active">
                       <div class = "container">
@@ -28,7 +28,8 @@
                      <table class = "table">
                          <tr>
                              <th></th>
-                             <th>チーム名</th>
+                             <th colspan="2">チーム名</th>
+
                              <th>勝ち点</th>
                              <th>得点</th>
                              <th>ペナルティ</th>
@@ -46,9 +47,14 @@
                                 <th><div class = "container">{{forloop.counter}}位</div></th>
                                 {% endif %}
                                 {% for x, y in value.items %}
-                                <th class="c-txtsp">
-                                 {{ y }}
-                                </th>
+                                {% if x == "id" %}
+                                    <th class="c-txtsp"><img class = "iconpicture" src = {% static y %} ></th>
+                                {% else %}
+                                    <th class="c-txtsp">
+                                    {{ y }}
+                                    </th>
+                                {% endif %}
+
                                 {% endfor %}
                             </tr>
                     {% endfor %}
