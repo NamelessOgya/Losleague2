@@ -6,7 +6,10 @@ background-color: #00072C;
 .nva{
 color:white;
 }
-
+.iconpicture{
+    height: 2rem;
+    width: 2rem;
+}
 .home{
     background-image: url("/static/los/home.jpg");
     background-size: cover;
@@ -14,13 +17,17 @@ color:white;
     width: 100%;
     height:9rem
 }
+.result{
+    font-size: 0.5rem;
+}
 @media screen and (min-width:600px) {
     .home {
         height: 25rem;
     }
+    .result{
+    font-size: 1rem;
+    }
 }
-
-
 .tabbutton{
     margin:10px;
 }

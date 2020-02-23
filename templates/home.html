@@ -9,7 +9,7 @@
                 </div>
 </div>
 <!--タブメニュー。参考url...https://bagelee.com/design/css/create_tabs_using_only_css/-->
-    <div class = "container-fluid">
+    <div class = "container-fluid result">
     <div class="box">
 <!--       <div class="mx-auto">-->
             <ul class="nav nav-pills">
@@ -66,6 +66,7 @@
                                  <tr>
                                      <th></th>
                                      <th>名前</th>
+                                     <th>所属</th>
                                      <th>勝利数</th>
                                      <th>敗北数</th>
                                  </tr>
@@ -84,10 +85,15 @@
 
 
                                         {% for x, y in value.items %}
-                                        <th class="c-txtsp">
-                                         {{ y }}
-                                        </th>
+                                            {% if x == "team" %}
+                                                <th class="c-txtsp"><img class = "iconpicture" src = {% static y %} ></th>
+                                            {% else %}
+                                                <th class="c-txtsp">
+                                                    {{ y }}
+                                                </th>
+                                            {% endif %}
                                         {% endfor %}
+
                                     </tr>
                             {% endfor %}
 

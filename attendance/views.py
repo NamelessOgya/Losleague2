@@ -48,27 +48,24 @@ def home(request):
     dic4 = {}
 #get top5 teams
     for t in Team.objects.all().filter(season=season()).order_by('-point', '-gp'):
-
         name = t.team_name
         point = t.point
         grosspoint = t.grosspoint
         penalty = t.penalty
         dic1[name] = {"name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
-# 勝利数トップ5を抽出
+# 勝利数トップ10を抽出
     for p in Player.objects.all().filter(season=season()).order_by('-win','lose')[:10]:
-
         name = p.player_name
         win = p.win
         lose = p.lose
-        dic2[name] = {"name": name, "win": win, "lose": lose}
-
+        team = p.team.team_name
+        dic2[name] = {"name": name,  "team": team+".png", "win": win, "lose": lose}
 # リーダーごとの勝利数を回収
     for c in ClassWinRate.objects.filter(season=season()).all():
         name = c.leader
         rate = c.rate
         total = c.total
         dic3[name] = {"name": name, "rate": rate, "total": total}
-
 #ブログ内容を回収
     for b in Blog.objects.all():
         title = b.title
@@ -1187,10 +1184,13 @@ def release_changed(request, date):
     m = Match.objects.filter(pk=date).get()
     if request.GET["table_release"] == "on":
         m.match_table_release = True
-        state = "公開"
+        state = "公開中、オーダー提出はできない状態"
+        m.register_release = False
     else:
         m.match_table_release = False
-        state = "非公開"
+        state = "非公開、オーダー提出は可能な状態"
+
+        m.register_release = True
 
     m.save()
     dic = {}
