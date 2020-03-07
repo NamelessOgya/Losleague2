@@ -12,15 +12,15 @@
     <div class = "container-fluid ">
     <div class="box">
 <!--       <div class="mx-auto">-->
-            <ul class="nav nav-pills">
-                <li class="active tabbutton"><a data-toggle="tab" href="#home">チーム</a></li>
+            <ul class="nav nav-tabs">
+                <li class="active tabbutton "><a data-toggle="tab" href="#home">チーム</a></li>
                 <li class="tabbutton"><a data-toggle="tab" href="#menu1">個人</a></li>
                 <li class="tabbutton"><a data-toggle="tab" href="#menu2">クラス別</a></li>
             </ul>
 
 <!--             チーム成績-->
                 <div class="tab-content result">
-                  <div id="home" class="tab-pane fade in active">
+                  <div id="home" class="tab-pane fade show active">
                       <div class = "container">
                      <p>勝ち点によって順位が決定</p>
                       <p>勝ち点同点の場合得失点-ペナルティの値により決定</p>
@@ -28,29 +28,29 @@
                      <table class = "table">
                          <thread class = "active">
                              <th></th>
-                             <th colspan="2">チーム名</th>
+                             <th colspan="2" class = "text-center align-middle">チーム名</th>
 
-                             <th>勝点</th>
-                             <th>得点</th>
-                             <th>減点</th>
+                             <th class = "text-center align-middle">勝点</th>
+                             <th class = "text-center align-middle">得点</th>
+                             <th class = "text-center align-middle">減点</th>
                          </thread>
 
                      {% for key, value in dic1.items %}
                             <tr>
                                 {% if forloop.counter == 1 %}
-                                    <th><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th>
+                                    <th class = "text-center align-middle"><img class = "icon" src = {% static "first.png" %} ></th>
                                 {%elif forloop.counter == 2 %}
-                                <th><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th>
+                                <th class = "text-center align-middle"><img class = "icon" src = {% static "second.png" %} ></th>
                                 {%elif forloop.counter == 3 %}
-                                <th><div class = "container"><img class = "icon" src = {% static "third.png" %} ></div></th>
+                                <th class = "text-center align-middle"><img class = "icon" src = {% static "third.png" %} ></th>
                                 {%else %}
-                                <th><div class = "container">{{forloop.counter}}位</div></th>
+                                <th class = "text-center align-middle">{{forloop.counter}}位</th>
                                 {% endif %}
                                 {% for x, y in value.items %}
                                 {% if x == "id" %}
-                                    <th class="c-txtsp"><img class = "iconpicture" src = {% static y %} ></th>
+                                    <th class="c-txtsp text-center align-middle"><img class = "iconpicture" src = {% static y %} ></th>
                                 {% else %}
-                                    <th class="c-txtsp">
+                                    <th class="c-txtsp text-center align-middle" style="padding-left: 0; padding-right: 0">
                                     {{ y }}
                                     </th>
                                 {% endif %}
@@ -71,32 +71,30 @@
                         <table class="table">
                                  <tr>
                                      <th></th>
-                                     <th>名前</th>
-                                     <th>所属</th>
-                                     <th>勝利数</th>
-                                     <th>敗北数</th>
+                                     <th class = "text-center align-middle">名前</th>
+                                     <th class = "text-center align-middle">所属</th>
+                                     <th class = "text-center align-middle">勝利数</th>
+                                     <th class = "text-center align-middle">敗北数</th>
                                  </tr>
 
                              {% for key, value in dic2.items %}
                                     <tr>
-                                        {% if forloop.counter == 1 %}<th><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th>
+                                        {% if forloop.counter == 1 %}<th class = "text-center align-middle"><img class = "icon" src = {% static "first.png" %} ></th>
                                         {%elif forloop.counter == 2 %}
-                                        <th><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th>
+                                        <th class = "text-center align-middle"><img class = "icon" src = {% static "second.png" %} ></th>
                                         {%elif forloop.counter == 3 %}
-                                        <th><div class = "container"><img class = "icon" src = {% static "third.png" %} ></div></th>
+                                        <th class = "text-center align-middle"><img class = "icon" src = {% static "third.png" %} ></th>
                                         {%else %}
-                                        <th><div class = "container">{{forloop.counter}}位</div></th>
+                                        <th class = "text-center align-middle">{{forloop.counter}}位</th>
                                         {% endif %}
 
 
 
                                         {% for x, y in value.items %}
                                             {% if x == "team" %}
-                                                <th class="c-txtsp"><img class = "iconpicture" src = {% static y %} ></th>
+                                                <th class="text-center align-middle"><img class = "iconpicture" src = {% static y %} ></th>
                                             {% else %}
-                                                <th class="c-txtsp">
-                                                    {{ y }}
-                                                </th>
+                                                <th class="text-center align-middle" style="padding-left: 0; padding-right: 0">{{ y }}</th>
                                             {% endif %}
                                         {% endfor %}
 
