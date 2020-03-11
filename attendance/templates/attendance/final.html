@@ -1,626 +1,345 @@
-<html>
+
 {% extends 'base.html' %}
 {% load static %}
     {% block content %}
-            <div class = "panel-body contentbox">
-
-                <div class = "content" style = "margin-top: 10px;">
-                    <div class = "container">
-                        <div class = "row">
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-3 col-sm-3 teambox">
-                                <a class = "team">{{ dic.team1 }}</a>
-                            </div>
-                            <div class = "col-1 col-sm-1">
-                                <div class = "row" style="height:50%;margin:0px;">
-                                    <div class = "col-12">
-                                        <a></a>
+<div class = " content toname_back">
+                    <div class = "container-fluid" style="padding:2px;">
+                        <div class = "row tmh"></div>
+<!--                        決勝-->
+                        <div class = "row tmhking" style="">
+                                    <div class = "col-5"></div>
+                                    <div class ="col-3" style="height: 100%; width: 100%; padding: 0;text-align:center;">
+                                        <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center; border:solid 0.3rem goldenrod;"src = {% static dic.dicp.semi1 %} >
                                     </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
-                            <div class = "col-1 col-sm-1 ">
-
-                            </div>
                         </div>
-                        <div class = "row">
-                            <div class = "col-1 col-sm-1">
-                                <a></a>
-                            </div>
-                            <div class = "col-3 col-sm-3">
-                            </div>
-                            <div class = "col-1 col-sm-1"style="border-right:groove;margin:0px;">
-                            </div>
-                            <div class = "col-1 col-sm-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{ dic.quauter1 }}</a>
-                            </div>
-                            <div class = "col-1 col-sm-1 padding:0;">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
 
+<!--                            決勝前直線-->
+<!--                        決勝まえ-->
+                        <div class = "row tmh" style="">
+                            <div class = "col-2 tmh">
                             </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                        </div>
-                    {#            SecondPlayer#}
-                        <div class = "row">
-                            <div class = col-1>
-
-                            </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team2}}</a>
-                            </div>
-                            <div class = "col-1 col-sm-1">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 col-sm-3">
-                            </div>
-                            <div class = "col-1 col-sm-1">
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{dic.semi1}}</a>
-                            </div>
-
-
-
-                            <div class = "col-1 col-sm-1">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-3 col-sm-3 teambox">
-                                <a class = "team">{{dic.team3}}</a>
-                            </div>
-                            <div class = "col-1 col-sm-1">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
+                            <div class = "col-3 tmh">
+                                <div class = "row tmh">
+                                    <div class = "col-6 right tmh"></div>
+                                    <div class = "col-6 up tmh"></div>
                                 </div>
                             </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                            <div class = "col-1 col-sm-1">
-
-                            </div>
-                        </div>
-                                    <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-                            </div>
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{dic.quauter2}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
+                            <div class ="col-3 up tmh"></div>
+                            <div class = "col-3 tmh">
+                                <div class = "row tmh">
+                                    <div class = "col-6 right up tmh"></div>
+                                    <div class = "col-6 tmh"></div>
                                 </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
                             </div>
                         </div>
 
-            {#            SecondPlayer#}
-                        <div class = "row">
-                            <div class = col-1>
 
+
+
+
+<!--決勝-->
+                        <div class = "row tmh" style="">
+                            <div class = "col-2 tmh">
                             </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team4}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
+                            <div class = "col-3 tmh">
+                                <div class = "row">
+                                    <div class = "col-3"></div>
+                                    <div class = "col-6 tmh" style="height: 100%; width: 100%; padding: 0;text-align:center;">
+                                        <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.semi1 %} >
                                     </div>
+                                    <div class = "col-3"></div>
                                 </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
+                            </div>
+                            <div class = "col-3">
+                            </div>
+                            <div class = "col-3 tmh">
+                                <div class = "row">
+                                    <div class = "col-3"></div>
+                                    <div class = "col-6 tmh" style="height: 100%; width: 100%; padding: 0;text-align:center;">
+                                        <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.semi2 %} >
                                     </div>
+                                    <div class = "col-3"></div>
                                 </div>
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
                             </div>
                         </div>
 
-                        <div class = "row">
-                            <div class = col-1>
-                                <a></a>
+<!--                        準決勝まえ-->
+<!--                        <div class = "row tmh" style="">-->
+<!--                            <div class = "col-4 right">-->
+<!--                            </div>-->
+<!--                            <div class = "col-5 right">-->
+<!--                            </div>-->
+<!--                            <div class = "col-3">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        準決勝ラインの上-->
+                        <!--                        1層目の上...2-->
+                        <div class = "row tmh" style="">
+<!--                            1の上-->
+                            <div class = "col-2 right tmh" >
                             </div>
-                            <div class = "col-3 padding:0;">
+<!--2の上                            -->
+                            <div class = "col-2 up tmh" >
                             </div>
-                            <div class = "col-1 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:60%;">{{dic.winner}}</a>
-                            </div>
-
-                            <div class = "col-1 padding:0;">
-                                <div class = "row" style="height:50%;border-bottom:groove;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
+<!--3の上-->
+                            <div class = "col-2 tmh" >
+                                <div class = "col-6 tmh" >
+                                        <div class = "right up tmh"></div>
                                 </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class = "col-1 padding:0;">
-
+<!--4の上-->
+                            <div class = "col-2 right tmh" >
+                            </div>
+<!--5の上                            -->
+                            <div class = "col-2 up tmh" >
+                            </div>
+<!--6の上                            -->
+                            <div class = "col-2 tmh " >
+                                <div class = "col-6 tmh" ">
+                                        <div class = "right up tmh" ></div>
+                                </div>
                             </div>
                         </div>
-                        <div class = "row">
-                            <div class = col-1>
+<!--                        準決勝ライン-->
+                        <div class = "row tmh">
+                            <div class = "col-4 tmh" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                <div class = "row tmh" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                    <div class = "col-3 tmh">
+                                    </div>
+                                    <div class = "col-6 tmh" style="height: 100%; width: 100%; padding: 0;text-align:center;">
+                                                    <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.quauter1 %} >
+                                    </div>
+                                    <div class = "col-3">
+                                    </div>
 
-                            </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team5}}</a>
-                            </div>
-                            <div class = "col-1">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
                                 </div>
                             </div>
-                            <div class = "col-1 padding:0;">
-
+                            <div class = "col-1" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                <div class = "tmh right"></div>
                             </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-                            </div>
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{dic.quauter3}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
+                            <div class = "col-1" style="padding:0;"></div>
+<!--ここまで右半分-->
+                            <div class = "col-4 tmh" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                <div class = "row tmh" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                    <div class = "col-3 tmh">
                                     </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
+                                    <div class = "col-6 tmh" style="height: 100%; width: 100%; padding: 0;text-align:center;">
+                                                    <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.quauter2 %} >
                                     </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                        </div>
-                    {#            SecondPlayer#}
-                        <div class = "row">
-                            <div class = col-1>
-
-                            </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team6}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
+                                    <div class = "col-3">
                                     </div>
-                                </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{dic.semi2}}</a>
-                            </div>
-
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = col-1>
-
-                            </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team7}}</a>
-                            </div>
-                            <div class = "col-1">
-                                <div class = "row" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-                                <div class = "row down" style="height:50%;">
-                                    <div class = col-12>
-                                        <a></a>
-                                    </div>
                                 </div>
                             </div>
-                            <div class = "col-1 padding:0;">
-
+                            <div class = "col-1" style="height: 100%; width: 100%; padding: 0;margin:0;">
+                                <div class = "right tmh"></div>
                             </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                        </div>
-                                    <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;"style="border-right:groove;">
-                            </div>
-                            <div class = "col-1 teambox"style="padding:0px;">
-                                <a class = "team"style="font-size:80%;">{{dic.quauter4}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
+                            <div class = "col-1"></div>
                         </div>
 
-            {#            SecondPlayer#}
-                        <div class = "row">
-                            <div class = col-1>
+
+
+<!--                        &lt;!&ndash;                        1層目の上...2&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class = "row tmh" style="">&ndash;&gt;-->
+<!--&lt;!&ndash;                            1の上&ndash;&gt;-->
+<!--                            <div class = "col-2 right tmh" >-->
+<!--                            </div>-->
+<!--&lt;!&ndash;2の上                            &ndash;&gt;-->
+<!--                            <div class = "col-2 tmh" >-->
+<!--                            </div>-->
+<!--&lt;!&ndash;3の上&ndash;&gt;-->
+<!--                            <div class = "col-2 tmh" >-->
+<!--                                <div class = "col-6 tmh" >-->
+<!--                                        <div class = "right tmh"></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--&lt;!&ndash;4の上&ndash;&gt;-->
+<!--                            <div class = "col-2 right tmh" >-->
+<!--                            </div>-->
+<!--&lt;!&ndash;5の上                            &ndash;&gt;-->
+<!--                            <div class = "col-2 tmh" >-->
+<!--                            </div>-->
+<!--&lt;!&ndash;6の上                            &ndash;&gt;-->
+<!--                            <div class = "col-2 tmh" >-->
+<!--                                <div class = "col-6 tmh" ">-->
+<!--                                        <div class = "right tmh" ></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+
+
+
+<!--                        </div>-->
+<!--                        1層目の上...1-->
+                        <div class = "row tmh" style="">
+                <!--1の上-->
+                            <div class = "col-2 tmh">
+                                <div class = "row tmh" >
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class="left up tmh" style="width:100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                        2の上-->
+                            <div class = "col-2">
+                                <div class = "row">
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "right up tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class="tmh" style="width:100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                        3の上-->
+                            <div class = "col-2">
+                                <div class = "row">
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "right tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class="tmh" style="width:100%;"></div>
+                                    </div>
+                                </div>
+<!--                        4の上-->
+                            </div>
+                            <div class = "col-2">
+                                <div class = "row">
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class="left up tmh" style="width:100%;"></div>
+                                    </div>
+
+                                </div>
 
                             </div>
-                            <div class = "col-3 teambox">
-                                <a class = "team">{{dic.team8}}</a>
-                            </div>
-                            <div class = "col-1 padding:0;">
-                                <div class = "row up" style="height:50%;">
-                                    <div class = "col-12">
-                                        <a></a>
+                        <!--                        5の上-->
+
+                            <div class = "col-2">
+                                <div class = "row">
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "right up tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class="tmh" style="width:100%;"></div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class = "col-1 padding:0;">
+                        <!--                        6の上-->
 
-                            </div>
-                            <div class = "col-1 padding:0;">
+                            <div class = "col-2">
+                                <div class = "row">
+                                    <div class = "col-6 tmh" style="width:100%;">
+                                        <div class = "right tmh" style="width:100%;"></div>
+                                    </div>
+                                    <div class = "col-6 tmh" style="width:100%; ">
+                                        <div class="tmh" style="width:100%;"></div>
+                                    </div>
 
+                                </div>
                             </div>
-                            <div class = "col-1 padding:0;">
 
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
-                            <div class = "col-1 padding:0;">
-
-                            </div>
                         </div>
-                        <div class = "row">
-                            <div class = col-1>
-                                <a></a>
-                            </div>
-                            <div class = "col-3 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;">
-                            </div>
-                            <div class = "col-1 padding:0;">
 
-                            </div>
-                            <div class = "col-1 padding:0;">
 
-                            </div>
-                            <div class = "col-1 padding:0;">
 
-                            </div>
-                            <div class = "col-1 padding:0;">
+                        <!--                        1段目-->
+                            <!--                        1枚目-->
+                        <div class = "row tmhking toname_box" style>
+                                <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center;padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team1 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;">
+                                            <a>{{dic.dicn.team1}}</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </div>
-                            <div class = "col-1 padding:0;">
 
-                            </div>
-                            <div class = "col-1 padding:0;">
+                            <!--                        2枚目-->
+                                <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center;padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team2 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;">
+                                            <a>{{dic.dicn.team2}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!--                        3枚目-->
+                                <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center;padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team3 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;">
+                                            <a>{{dic.dicn.team3}}</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </div>
-                            <div class = "col-1 padding:0;">
+                            <!--                        4枚目-->
+                                <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center;padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team4 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;">
+                                            <a>{{dic.dicn.team4}}</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </div>
+                            <!--                        5枚目-->
+                                <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center; padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team5 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;">
+                                            <a>{{dic.dicn.team5}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <!--                        6枚目-->
+                            <div class  = "col-2 tmhking" >
+                                    <div class ="row " style = "height:75%;">
+                                        <div class = "col-12" style = "height:100%; text-align:center;padding:1px;">
+                                            <img class = "img-fluid img-thumbnail" style="height:100%; width:auto; margin:auto;text-align:center;"src = {% static dic.dicp.team6 %} >
+                                         </div>
+                                    </div>
+                                    <div class ="row" style = "height:25%;">
+                                        <div class = "col-12 team_name" style = "text-align:center;vertical-align:up">
+                                            <a>{{dic.dicn.team6}}</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                         </div>
+                        <div class = "row tmh"></div>
                     </div>
-                </div>
-            </div>
+</div>
+</div>
 
     {% endblock %}
-</html>

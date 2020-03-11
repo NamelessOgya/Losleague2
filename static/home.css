@@ -78,7 +78,7 @@ footer{
     border-style:solid;
     width: 100%;
     margin:0;
-    margin-top:2vh;
+    margin-top:0;
 }
 
 .footerbox{
@@ -150,15 +150,24 @@ table {
     height:100%;
 }
 
-.down
-{
-    border-top-style:groove;
-    border-right-style:groove;
-}
 .up
 {
-    border-bottom-style:groove;
-    border-right-style:groove;
+    border-top-style:solid;
+    border-top-color: white;
+}
+.down {
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+.right
+{
+    border-right-style:solid;
+    border-right-color: white;
+}
+.left
+{
+    border-left-style:solid;
+    border-left-color: white;
 }
 .iconzone{
     padding:0
@@ -166,4 +175,45 @@ table {
 .icon{
     height: 23px;
     width: 33px;
+}
+.tmh{
+    height:3rem!important;
+    padding:0!important;
+    width:100%!important;
+    margin:0!important;
+}
+@media only screen and (min-width: 768px){
+    .tmh{
+    height:5em!important;
+        padding:0!important;
+        width:100%!important;
+        margin:0!important;
+}
+}
+.tmhking{
+    height:6rem!important;
+    padding:0!important;
+    width:100%!important;
+    margin:0!important;
+}
+@media only screen and (min-width: 768px){
+    .tmhking{
+    height:8rem!important;
+        padding:0!important;
+        width:100%!important;
+        margin:0!important;
+}
+}
+.toname_back{
+    background-image: url("/static/los/toname_back.png");
+    background-size: cover;
+
+}
+.team_name{
+    color:white;
+}
+.toname_box{
+    border-style: groove;
+    border-color:white;
+    background-color: black;
 }

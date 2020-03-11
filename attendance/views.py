@@ -82,9 +82,13 @@ def logout(request):
 
 def final(request):
     t = Tournament.objects.all().filter(season=season()).get()
-    dic = {"team1": t.team1, "team2": t.team2, "team3": t.team3, "team4": t.team4, "team5": t.team5, "team6": t.team6, "team7": t.team7, "team8": t.team8,
-           "quauter1": t.quauter1, "quauter2": t.quauter2, "quauter3":t.quauter3, "quauter4": t.quauter4,
+    dicp = {"team1": t.team1+".png", "team2": t.team2+".png", "team3": t.team3+".png", "team4": t.team4+".png", "team5": t.team5+".png", "team6": t.team6+".png",
+           "quauter1": t.quauter1+".png", "quauter2": t.quauter2+".png",
+           "semi1": t.semi1+".png", "semi2": t.semi2+".png","winner": t.winner+".png", "season": t.season}
+    dicn = {"team1": t.team1, "team2": t.team2, "team3": t.team3, "team4": t.team4, "team5": t.team5, "team6": t.team6,
+           "quauter1": t.quauter1, "quauter2": t.quauter2,
            "semi1": t.semi1, "semi2": t.semi2,"winner": t.winner, "season": t.season}
+    dic  = {"dicp": dicp, "dicn": dicn}
     return render(request, 'attendance/final.html', {"dic": dic})
 
 def listdate(request):
@@ -1199,4 +1203,5 @@ def release_changed(request, date):
 
 
     return render(request, 'attendance/release_changed.html', {"dic":dic})
+
 
