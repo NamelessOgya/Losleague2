@@ -1205,3 +1205,7 @@ def release_changed(request, date):
     return render(request, 'attendance/release_changed.html', {"dic":dic})
 
 
+def team_page(request, team_name):
+    dict = {"team_name":team_name+".png"}
+
+    return render(request, 'team_page__.html', dict)

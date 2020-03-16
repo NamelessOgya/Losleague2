@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div class="box">
+     <div class = "container-fluid">
+         <div class = "row">
+             <div class  = "col-12 team_page_title">
+                 <a>nibuichi</a>
+             </div>
+         </div>
+         <div class = "row" style = "margin-bottom:1rem;">
+             <div class = "col-4" style = "padding:0;">
+                 <img class = "img-fluid img-thumbnail" style="width:auto; margin:auto;text-align:center;"src = {% static team_name %} >
+             </div>
+             <div class = "col-8">
+                 <table class = "table">
+                     <tr>
+                         <th>メンバー</th>
+                         <th>xx 人</th>
+                     </tr>
+                     <tr>
+                         <th>獲得賞金総額</th>
+                         <th>yy </th>
+                     </tr>
+                     <tr>
+                         <th>設立</th>
+                         <th>2019年1月</th>
+                     </tr>
+                     <tr>
+                         <th>代表</th>
+                         <th><a href = "https://twitter.com/hakuginnnohana">Lasa</a></th>
+                     </tr>
+
+                 </table>
+             </div>
+         </div>
+         <div class = "row">
+             <div class = "col-12 team_page_title">
+                 <a>チーム概要等</a>
+             </div>
+         </div>
+         <div class = "row">
+             <div class = "col-12">
+             <a>おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ
+                 おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ
+                 おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ</a>
+             </div>
+         </div>
+         <div class = "row team_page_title">
+             <div class = "col-11 team_page_title">
+                <a>メンバー戦績とJCG実績</a>
+             </div>
+         </div>
+         <!--         for loop here-->
+         <div class = "row">
+             <div class = "col-12">
+                 <table class = "table">
+                     <tr>
+                         <th colspan="4" class = "text-center align-middle" style = "padding:0">メンバー</th>
+                         <th class = "text-center align-middle" style = "padding:0">優勝</th>
+                         <th class = "text-center align-middle" style = "padding:0">準優勝</th>
+                         <th class = "text-center align-middle" style = "padding:0">4th</th>
+                     </tr>
+                     <tr>
+                         <th colspan="3" class = "text-center align-middle" style = "padding:0">vetpath</th>
+                         <th class = "text-center align-middle" style = "padding:0"><a  href="https://twitter.com/hakuginnnohana">twitter</a></th>
+                         <th class = "text-center align-middle" style = "padding:0">1</th>
+                         <th class = "text-center align-middle" style = "padding:0">1</th>
+                         <th class = "text-center align-middle" style = "padding:0">0</th>
+                     </tr>
+                 </table>
+         <div class = "row team_page_title">
+             <div class = "col-11 team_page_title">
+                <a>LOSリーグ戦績</a>
+             </div>
+         </div>
+                 <table class = "table">
+                     <tr>
+                         <th colspan="3" class = "text-center align-middle" style = "padding:0">シーズン</th>
+                         <th class = "text-center align-middle" style = "padding:0">順位</th>
+                     </tr>
+                     <tr>
+                         <th colspan="3" class = "text-center align-middle" style = "padding:0">LOSリーグseason 10</th>
+                         <th class = "text-center align-middle" style = "padding:0">6位</th>
+                     </tr>
+                 </table>
+
+
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+</div>
+{% endblock %}

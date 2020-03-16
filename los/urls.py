@@ -13,4 +13,5 @@ urlpatterns = [
     path('password_change/', views.PasswordChange.as_view(), name='password_change'), #追加
     path('password_change/done/', views.PasswordChange, name='password_change_done'), #追加
     path('user/', views.user,name='user'),
+    path('team_page/<str:team_name>/',views.team_page),
 ]

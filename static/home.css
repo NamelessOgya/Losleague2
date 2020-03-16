@@ -217,3 +217,11 @@ table {
     border-color:white;
     background-color: black;
 }
+
+.team_page_title
+{
+    background-color: #00076C;
+    color:white;
+    padding-right: 1rem;!important
+
+}
