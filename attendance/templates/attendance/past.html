@@ -14,17 +14,26 @@
                                  <div class="card-header">LOSリーグシーズン{{key}}</div>
                                     <table class = "table">
                                         <tr>
-                                            <th><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th><th>{{ value.team1 }}</th>
+                                            <th class ="text-center align-middle"><div class = "container"><img class = "icon" src = {% static "first.png" %} ></div></th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team1 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname1}}</th>
                                         </tr>
                                         <tr>
-                                            <th><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th><th>{{ value.team2 }}</th>
+                                            <th class ="text-center align-middle"><div class = "container"><img class = "icon" src = {% static "second.png" %} ></div></th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team2 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname2}}</th>
                                         </tr>
                                         <tr>
-                                            <th>ベスト4</th><th>{{ value.team3 }},{{value.team4}}</th>
+                                            <th class ="text-center align-middle">ベスト4</th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team3 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname3}}</th>
+
                                         </tr>
                                         <tr>
-                                            <th>ベスト8</th><th>{{ value.team5 }},{{value.team6}}</th>
+                                            <th class ="text-center align-middle">ベスト4</th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team4 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname4}}</th>
                                         </tr>
+
+                                        <tr>
+                                            <th class ="text-center align-middle">ベスト8</th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team5 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname5}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th class ="text-center align-middle">ベスト8</th><th class ="text-center align-middle"><img class = "iconpicture" src = {% static value.team6 %} ></th><th colspan="2" class ="text-center align-middle">{{ value.teamname6}}</th>
+                                        </tr>
+
                                     </table><br>
                                  </div>
                                 <div class="card">
@@ -60,27 +69,17 @@
                                             <tr>
                                                 <th><div class = "container">10位</div></th><th>{{ value.player10 }}</th><th>{{ value.r10 }}</th>
                                             </tr>
-
-
-
-
-
-
-
                                         </table>
-
-
+                                    </div>
                                 </div>
-
-
+                    </div>
+                </div>
 
                         {% endfor %}
 
                         <div class = "container"><button type = "button" class = "btn btn-primary" href = '/'>Back</button></div>
-
-                    </div>
-
             </div>
+
             </div>
 
 

@@ -1083,12 +1083,19 @@ def past(request):#過去の戦績の参照
     for p in Past.objects.all():
         dic ={}
 
-        dic["team1"] = p.team1
-        dic["team2"] = p.team2
-        dic["team3"] = p.team3
-        dic["team4"] = p.team4
-        dic["team5"] = p.team5
-        dic["team6"] = p.team6
+        dic["team1"] = p.team1 + ".png"
+        dic["team2"] = p.team2 + ".png"
+        dic["team3"] = p.team3 + ".png"
+        dic["team4"] = p.team4 + ".png"
+        dic["team5"] = p.team5 + ".png"
+        dic["team6"] = p.team6 + ".png"
+
+        dic["teamname1"] = p.team1
+        dic["teamname2"] = p.team2
+        dic["teamname3"] = p.team3
+        dic["teamname4"] = p.team4
+        dic["teamname5"] = p.team5
+        dic["teamname6"] = p.team6
 
         dic["player1"] = p.player1
         dic["r1"]  = p.r1
