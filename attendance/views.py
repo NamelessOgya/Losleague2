@@ -1119,7 +1119,7 @@ def past(request):#過去の戦績の参照
         dic["r10"]  = p.r10
         dict[p.season]=dic
 
-    return render(request, 'attendance/past.html', {"dict":dict})
+    return render(request,  'attendance/past.html', {"dict":dict})
 
 class PasswordChange(LoginRequiredMixin, PasswordChangeView):
     """パスワード変更ビュー"""
