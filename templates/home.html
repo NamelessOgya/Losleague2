@@ -9,6 +9,18 @@
                 </div>
 </div>
 <!--タブメニュー。参考url...https://bagelee.com/design/css/create_tabs_using_only_css/-->
+            {% for key, value in dic4.items %}
+            <div class="container">
+                <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <a class="p-2 mb-3">{{key}}</a>
+                    </div>
+                    <div class = "panel-body contentbox">
+                        <a class="p-2 mb-3">{{value.context}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
     <div class = "container-fluid ">
     <div class="box">
 <!--       <div class="mx-auto">-->
@@ -131,17 +143,17 @@
 </div>
 </div>
 <!--            コンテンツ一単位-->
-            {% for key, value in dic4.items %}
-            <div class="container">
-                <div class = "panel panel-default box">
-                    <div class = "panel-heading tytlebox">
-                        <a class="p-2 mb-3">{{key}}</a>
-                    </div>
-                    <div class = "panel-body contentbox">
-                        <a class="p-2 mb-3">{{value.context}}</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+<!--            {% for key, value in dic4.items %}-->
+<!--            <div class="container">-->
+<!--                <div class = "panel panel-default box">-->
+<!--                    <div class = "panel-heading tytlebox">-->
+<!--                        <a class="p-2 mb-3">{{key}}</a>-->
+<!--                    </div>-->
+<!--                    <div class = "panel-body contentbox">-->
+<!--                        <a class="p-2 mb-3">{{value.context}}</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
 <!--コンテンツ1単位ここまで-->
 {% endblock %}
