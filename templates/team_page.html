@@ -56,7 +56,7 @@
                      {% for key,value in dic.items%}
                      <tr >
                          <th   colspan="5" class = "table-active text-center align-center font-size:2rem;" style = "padding:0"><a style="font-size:1.3rem;">{{key}}</a></th>
-                         <th   colspan="2" class = "table-active text-center align-center font-size:2rem;" style = "padding:0"><a  href="https://twitter.com/{{value.0}}" style="font-size:1.3rem;">twitter</a></th>
+                         <th   colspan="2" class = "table-active text-center align-center font-size:2rem;" style = "padding:0"><a  href="https://twitter.com/{{value.0.0}}" style="font-size:1.3rem;">twitter</a></th>
                      </tr>
                      <tr>
                          {% if value.0.1 != 0 %}<th colspan = "7"class = "text-center align-middle" style = "padding:0">JCG:{% if value.0.1 != 0 %}優勝×{{value.0.1}}{% endif %}</th>{% endif %}

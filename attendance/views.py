@@ -1098,7 +1098,7 @@ def update3(request):#クラス勝率の計算
 
 def past(request):#過去の戦績の参照
     dict = {}
-    for p in Past.objects.all():
+    for p in Past.objects.all().order_by("-pk"):
         dic ={}
 
         dic["team1"] = p.team1 + ".png"
