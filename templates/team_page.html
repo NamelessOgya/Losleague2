@@ -74,6 +74,14 @@
                      </tr>
                      {% endif %}
                      {% endfor %}
+                     {% for v in value.3 %}
+                     {% if v.0 == "1" %}
+                     <tr>
+                         <th colspan = "7" class = "text-center align-middle" style = "padding:0">{{v.1}}　{{ v.2 }}位</th>
+                     </tr>
+                     {% endif %}
+                     {% endfor %}
+
                      {% endfor %}
                  </table>
          <div class = "row team_page_title">

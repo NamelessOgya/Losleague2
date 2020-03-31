@@ -11,7 +11,7 @@ from django.template.context_processors import csrf
 import threading
 from threading import Thread
 from django.contrib.auth.decorators import user_passes_test
-from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Tournament, Past, Season, JCGrank
+from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Tournament, Past, Season, JCGrank, Other_tournament
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -1241,6 +1241,7 @@ def team_page(request, team_name):
     dict["words"]=t.words
     dict["leader"] = t.leader
     dict["los"] = []
+    dict["others"]=[]
     for p in Past.objects.all():
         season = p.season
         if t.team_name == p.team1:
@@ -1255,7 +1256,6 @@ def team_page(request, team_name):
             dict["los"].append([season, p.team5, "6位"])
         elif t.team_name == p.team6:
             dict["los"].append([season, p.team6, "6位"])
-
     counter = 0
     total = 0
     dic = {}
@@ -1291,7 +1291,11 @@ def team_page(request, team_name):
             elif p.player_name == ps.player10:
                 losli.append(["1",ps.season, ps.place10])
             pc+=1
-        dic[p.player_name] = [xx, losli,pc]
+        o_li = []
+        for o in Other_tournament.objects.all().filter(player=p):
+            o_li.append(["1", o.tournament_name, o.prize])
+
+        dic[p.player_name] = [xx, losli,pc,o_li]
         counter+=1
     dict["counter"] = counter
     dict["total"] = total
