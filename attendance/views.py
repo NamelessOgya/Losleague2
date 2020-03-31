@@ -1293,7 +1293,7 @@ def team_page(request, team_name):
             pc+=1
         o_li = []
         for o in Other_tournament.objects.all().filter(player=p):
-            o_li.append(["1", o.tournament_name, o.prize])
+            o_li.append(["1", o.tournament_name, o.rank])
 
         dic[p.player_name] = [xx, losli,pc,o_li]
         counter+=1
