@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div class="box">
+     <div class = "container-fluid">
+         <div class = "row">
+             <div class  = "col-12 team_page_title">
+                 <a>JCG 2Pick 賞金ランキング({{ last_reload }}更新)</a>
+             </div>
+         </div>
+         <div class = "row" style = "height:2rem;">
+             <div class = "container">
+             <a>表記漏れ、名前の変更等は</a><a href = "https://twitter.com/hakuginnnohana">vatpath</a><a>まで連絡お願いします。</a>
+             </div>
+         </div>
+        <table class = "table">
+            <thread class = "active">
+                <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;"></th>
+
+                <th colspan="6" class = "text-center align-middle">氏名</th>
+
+                <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">1位</th>
+                <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">2位</th>
+                <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">4位</th>
+                <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">total</th>
+            </thread>
+            {% for p, d in dict.items %}
+            {% for ds in d %}
+                <tr>
+                    <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">{{ forloop.counter }}</th>
+                    <th colspan="2" class = "text-center align-middle" ><img class = "img-fluid"style="width:auto; margin:auto;text-align:center;" src = {% static ds.team %} ></th></th>
+                    <th colspan="4" class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;"><a style="font-size:1.2rem">{{ds.player_name}}</a></th>
+                    <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">{{ds.first}}</th>
+                    <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">{{ds.second}}</th>
+                    <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">{{ds.fourth}}</th>
+                    <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">{{ds.total}}</th>
+                </tr>
+            {% endfor %}
+            {% endfor %}
+
+        </table>
+
+     </div>
+ </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+<html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+    <div class="container">
+            <div class = "panel panel-default box">
+                    <div class = "panel-heading tytlebox">
+                        <p>{{user.username}}チームページ編集</p>
+                    </div>
+                    <div class = "contentbox">
+                        <div class = "container" style = "margin-bottom:5px;">
+                        <form action="/attendance/team_page_edit/done" methon="post" >
+                            {% csrf_token %}
+                            <div>
+                            <label for="establish">リーダー:</label>
+                            <input type="text" id="leader" name="leader" class="form-control">
+                            </div>
+
+                          <div>
+                            <label for="establish">設立日:</label>
+                            <input type="text" id="establish" name="establish" class="form-control">
+                          </div>
+                          <div>
+                            <label for="msg">チーム概要等:</label>
+                            <textarea id="msg" name="msg" cols="35" rows="14" class="form-control" ></textarea>
+                          </div>
+                            <button type="submit" class="btn btn-primary">送信</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+{% endblock %}
+</html>

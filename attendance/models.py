@@ -9,14 +9,18 @@ class Team(models.Model):
     point = models.IntegerField(verbose_name='勝ち点', blank=True, null=True, default=0)
     grosspoint = models.IntegerField(verbose_name='得点差(ペナルティ除く)', blank=True, null=True, default=0)
     penalty = models.IntegerField(verbose_name='ペナルティ(正の数でつけてください)', blank=True, null=True, default=0)
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
     gp = models.IntegerField(verbose_name='得点差-ペナルティ', blank=True, null=True, default=0)
+    start = models.CharField(max_length=100, default="",null=True)
+    words = models.TextField(max_length=500, default="",null=True)
+    leader = models.CharField(max_length=100, default="",null=True)
+
     def __str__(self):
         return self.team_name
 
 class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     player_name = models.CharField(max_length=100)
+    visible = models.BooleanField(verbose_name='在籍(脱退時外す)', default=True)
     win = models.IntegerField(verbose_name='win', blank=True, null=True, default=0)
     lose = models.IntegerField(verbose_name='lose', blank=True, null=True, default=0)
     e_win = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
@@ -35,7 +39,8 @@ class Player(models.Model):
     w_lose = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     nc_win = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     nc_lose = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
+    playerid = models.IntegerField(verbose_name='ID', blank=True, null=True, default=0)
+    twitter = models.CharField(max_length=100)
 
     def __str__(self):
         return self.player_name
@@ -44,7 +49,6 @@ class Match(models.Model):
     match_date = models.DateTimeField('date published')
     match_table_release = models.BooleanField(verbose_name='マッチング表の公表', default=False)
     register_release = models.BooleanField(verbose_name='登録ページの公表', default=False,)
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
     def __str__(self):
         return str(self.match_date)
@@ -68,7 +72,6 @@ class Table(models.Model):
     date = models.ForeignKey(Match, on_delete=models.CASCADE)
     team1 = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team1")
     team2 = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team2")
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
     def __str__(self):
             return self.team1.team_name+"/"+self.team2.team_name+"/"+str(self.date)
@@ -103,6 +106,7 @@ class PlayerResult(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     leader = models.CharField(max_length=100, default="")
     wl = models.CharField(max_length=100, default="")
+    rp = models.ForeignKey(Reported, on_delete=models.CASCADE, default=None)
 
 
 
@@ -110,7 +114,7 @@ class TeamResult(models.Model):
     date = models.ForeignKey(Match, on_delete=models.CASCADE)
     team = models.CharField(max_length=100, default="")
     point = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
-
+    rp = models.ForeignKey(Reported, on_delete=models.CASCADE, default=None)
     def __str__(self):
         return str(self.date) + "/" + self.team
 
@@ -120,24 +124,16 @@ class ClassWinRate(models.Model):
     lose = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     rate = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
     total = models.IntegerField(verbose_name='', blank=True, null=True, default=0)
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
     def __str__(self):
         return self.leader
 
 class Blog(models.Model):
     title = models.CharField(max_length=500, default="")
-    context = models.TextField(max_length=200, default="")
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
+    context = models.TextField(max_length=500, default="")
 
     def __str__(self):
         return self.title
-
-class Season(models.Model):
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
-
-    def __str__(self):
-        return "現在のシーズン"
 
 class Tournament(models.Model):
     team1 = models.CharField(max_length=100, default="-")
@@ -157,7 +153,6 @@ class Tournament(models.Model):
     semi2 = models.CharField(max_length=100, default="-")
 
     winner = models.CharField(max_length=100, default="-")
-    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
 
 class Past(models.Model):
     season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
@@ -169,25 +164,47 @@ class Past(models.Model):
     team6 = models.CharField(max_length=100, default="-")
     player1 = models.CharField(max_length=100, default="-")
     r1= models.CharField(max_length=100, default="-")
+    place1 = models.CharField(max_length=100, default="-")
     player2 = models.CharField(max_length=100, default="-")
     r2= models.CharField(max_length=100, default="-")
+    place2 = models.CharField(max_length=100, default="-")
     player3 = models.CharField(max_length=100, default="-")
     r3 = models.CharField(max_length=100, default="-")
+    place3 = models.CharField(max_length=100, default="-")
     player4 = models.CharField(max_length=100, default="-")
     r4 = models.CharField(max_length=100, default="-")
+    place4 = models.CharField(max_length=100, default="-")
     player5 = models.CharField(max_length=100, default="-")
     r5 = models.CharField(max_length=100, default="-")
+    place5 = models.CharField(max_length=100, default="-")
     player6 = models.CharField(max_length=100, default="-")
     r6 =  models.CharField(max_length=100, default="-")
+    place6 = models.CharField(max_length=100, default="-")
     player7 = models.CharField(max_length=100, default="-")
     r7 = models.CharField(max_length=100, default="-")
+    place7 = models.CharField(max_length=100, default="-")
     player8 = models.CharField(max_length=100, default="-")
     r8 = models.CharField(max_length=100, default="-")
+    place8 = models.CharField(max_length=100, default="-")
     player9 = models.CharField(max_length=100, default="-")
     r9 = models.CharField(max_length=100, default="-")
+    place9 = models.CharField(max_length=100, default="-")
     player10 = models.CharField(max_length=100, default="-")
     r10 = models.CharField(max_length=100, default="-")
+    place10 = models.CharField(max_length=100, default="-")
 
+class Season(models.Model):
+    season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
+    lastest_reload = models.CharField(max_length=100, default="-")
 
+    def __str__(self):
+        return "現在のシーズン"
 
+class JCGrank(models.Model):
+    player_name = models.CharField(max_length=100, default="-")
+    JCGID = models.IntegerField(verbose_name='JCGID', blank=True, null=True, default=0)
+    first = models.IntegerField(verbose_name='1st', blank=True, null=True, default=0)
+    second = models.IntegerField(verbose_name='2nd', blank=True, null=True, default=0)
+    fourth = models.IntegerField(verbose_name='4th', blank=True, null=True, default=0)
+    total = models.IntegerField(verbose_name='total', blank=True, null=True, default=0)
 

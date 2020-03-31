@@ -16,33 +16,35 @@
                         <a class="p-2 mb-3">{{key}}</a>
                     </div>
                     <div class = "panel-body contentbox">
-                        <a class="p-2 mb-3">{{value.context}}</a>
+                        <div class="container">
+                        <a class="p-2 mb-3">{{value.context | linebreaksbr}}</a>
+                    </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
 <!--_______________________________________________________________________-->
-     <div class="container">
-                <div class = "panel panel-default box">
-                    <div class = "panel-heading tytlebox">
-                        <a class="p-2 mb-3">LOSリーグseason10参加チーム募集について</a>
-                    </div>
-                    <div class = "panel-body contentbox">
-                        <div class ="container">
-                            <a>LOSリーグ4月から行われる予定のseason10への参加チームを募集しています。</a><br>
-                            <a>概要は</a>
-                            <a href="https://docs.google.com/document/d/1-vs5b-i9J3cGOjJ_Wdoh5Q43XTJvd2R3oFBYrw0tLv8/edit?usp=sharing" target=”_blank”>こちら</a>
-                            <a>申し込みは</a>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfPgRBdiweVjCFiPqs8F7cE7C2f9Zs0500eVMceTXteYIVLTA/viewform?usp=sf_link" target=”_blank”>こちら</a>
-                            <a>よりお願いします。</a><br>
-                            <a>不明な点のお問い合わせは</a>
-                            <a href = "https://twitter.com/ne2gm" target=”_blank”>代表twitter</a>
-                            <a>までお願いします。</a><br>
-                            <a>締め切りは3/29までとなります。</a>
-                        </div>
-                    </div>
-                </div>
-     </div>
+<!--     <div class="container">-->
+<!--                <div class = "panel panel-default box">-->
+<!--                    <div class = "panel-heading tytlebox">-->
+<!--                        <a class="p-2 mb-3">LOSリーグseason10参加チーム募集について</a>-->
+<!--                    </div>-->
+<!--                    <div class = "panel-body contentbox">-->
+<!--                        <div class ="container">-->
+<!--                            <a>LOSリーグ4月から行われる予定のseason10への参加チームを募集しています。</a><br>-->
+<!--                            <a>概要は</a>-->
+<!--                            <a href="https://docs.google.com/document/d/1-vs5b-i9J3cGOjJ_Wdoh5Q43XTJvd2R3oFBYrw0tLv8/edit?usp=sharing" target=”_blank”>こちら</a>-->
+<!--                            <a>申し込みは</a>-->
+<!--                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfPgRBdiweVjCFiPqs8F7cE7C2f9Zs0500eVMceTXteYIVLTA/viewform?usp=sf_link" target=”_blank”>こちら</a>-->
+<!--                            <a>よりお願いします。</a><br>-->
+<!--                            <a>不明な点のお問い合わせは</a>-->
+<!--                            <a href = "https://twitter.com/ne2gm" target=”_blank”>代表twitter</a>-->
+<!--                            <a>までお願いします。</a><br>-->
+<!--                            <a>締め切りは3/29までとなります。</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--     </div>-->
 <!--_______________________________________________________________________-->
 
     <div class = "container-fluid ">
@@ -67,7 +69,7 @@
                              <th colspan="2" class = "text-center align-middle">チーム名</th>
 
                              <th class = "text-center align-middle">勝点</th>
-                             <th class = "text-center align-middle">得点</th>
+                             <th class = "text-center align-middle">得点差</th>
                              <th class = "text-center align-middle">減点</th>
                          </thread>
 

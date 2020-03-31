@@ -5,30 +5,30 @@
      <div class = "container-fluid">
          <div class = "row">
              <div class  = "col-12 team_page_title">
-                 <a>nibuichi</a>
+                 <a>{{team_name}}</a>
              </div>
          </div>
          <div class = "row" style = "margin-bottom:1rem;">
              <div class = "col-4" style = "padding:0;">
-                 <img class = "img-fluid img-thumbnail" style="width:auto; margin:auto;text-align:center;"src = {% static team_name %} >
+                 <img class = "img-fluid img-thumbnail" style="width:auto; margin:auto;text-align:center;"src = {% static team %} >
              </div>
              <div class = "col-8">
                  <table class = "table">
                      <tr>
                          <th>メンバー</th>
-                         <th>xx 人</th>
+                         <th>{{counter}}人</th>
                      </tr>
                      <tr>
                          <th>獲得賞金総額</th>
-                         <th>yy </th>
+                         <th>{{total}} </th>
                      </tr>
                      <tr>
                          <th>設立</th>
-                         <th>2019年1月</th>
+                         <th>{{start}}</th>
                      </tr>
                      <tr>
                          <th>代表</th>
-                         <th><a href = "https://twitter.com/hakuginnnohana">Lasa</a></th>
+                         <th><a>{{leader}}</a></th>
                      </tr>
 
                  </table>
@@ -41,9 +41,7 @@
          </div>
          <div class = "row">
              <div class = "col-12">
-             <a>おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ
-                 おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ
-                 おぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃおぎゃ</a>
+             <a>{{ words | linebreaksbr }}</a>
              </div>
          </div>
          <div class = "row team_page_title">
@@ -55,19 +53,28 @@
          <div class = "row">
              <div class = "col-12">
                  <table class = "table">
-                     <tr>
-                         <th colspan="4" class = "text-center align-middle" style = "padding:0">メンバー</th>
-                         <th class = "text-center align-middle" style = "padding:0">優勝</th>
-                         <th class = "text-center align-middle" style = "padding:0">準優勝</th>
-                         <th class = "text-center align-middle" style = "padding:0">4th</th>
+                     {% for key,value in dic.items%}
+                     <tr >
+                         <th   colspan="5" class = "table-active text-center align-center font-size:2rem;" style = "padding:0"><a style="font-size:1.3rem;">{{key}}</a></th>
+                         <th   colspan="2" class = "table-active text-center align-center font-size:2rem;" style = "padding:0"><a  href="https://twitter.com/{{value.0}}" style="font-size:1.3rem;">twitter</a></th>
                      </tr>
                      <tr>
-                         <th colspan="3" class = "text-center align-middle" style = "padding:0">vetpath</th>
-                         <th class = "text-center align-middle" style = "padding:0"><a  href="https://twitter.com/hakuginnnohana">twitter</a></th>
-                         <th class = "text-center align-middle" style = "padding:0">1</th>
-                         <th class = "text-center align-middle" style = "padding:0">1</th>
-                         <th class = "text-center align-middle" style = "padding:0">0</th>
+                         {% if value.0.1 != 0 %}<th colspan = "7"class = "text-center align-middle" style = "padding:0">JCG:{% if value.0.1 != 0 %}優勝×{{value.0.1}}{% endif %}</th>{% endif %}
                      </tr>
+                     <tr>
+                        {% if value.0.2 != 0 %}<th colspan = "7"class = "text-center align-middle" style = "padding:0">JCG:{% if value.0.2 != 0 %}準優勝×{{value.0.2}}{% endif %}</th>{% endif %}
+                     </tr>
+                     <tr>
+                          {% if value.0.3 != 0 %}<th colspan = "7"class = "text-center align-middle" style = "padding:0">JCG:{% if value.0.3 != 0 %}3位×{{value.0.3}}{% endif %}</th>{% endif %}
+                     </tr>
+                     {% for v in value.1 %}
+                     {% if v.0 == "1" %}
+                     <tr>
+                         <th colspan = "7" class = "text-center align-middle" style = "padding:0">LOSリーグseason{{v.1}}　個人第{{ v.2 }}位</th>
+                     </tr>
+                     {% endif %}
+                     {% endfor %}
+                     {% endfor %}
                  </table>
          <div class = "row team_page_title">
              <div class = "col-11 team_page_title">
@@ -79,10 +86,12 @@
                          <th colspan="3" class = "text-center align-middle" style = "padding:0">シーズン</th>
                          <th class = "text-center align-middle" style = "padding:0">順位</th>
                      </tr>
+                     {% for l in los %}
                      <tr>
-                         <th colspan="3" class = "text-center align-middle" style = "padding:0">LOSリーグseason 10</th>
-                         <th class = "text-center align-middle" style = "padding:0">6位</th>
+                         <th colspan="3" class = "text-center align-middle" style = "padding:0">LOSリーグseason {{l.0}}</th>
+                         <th class = "text-center align-middle" style = "padding:0">{{l.2}}</th>
                      </tr>
+                     {% endfor %}
                  </table>
 
 

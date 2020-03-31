@@ -11,7 +11,7 @@ from django.template.context_processors import csrf
 import threading
 from threading import Thread
 from django.contrib.auth.decorators import user_passes_test
-from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past
+from .models import Match, Player, Team, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Tournament, Past, Season, JCGrank
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -39,7 +39,6 @@ def strdate(d):
 
 
 
-
 def home(request):
 # チームポイント順で並び替えて上位チームを選抜
     dic1 = {}
@@ -47,21 +46,32 @@ def home(request):
     dic3 = {}
     dic4 = {}
 #get top5 teams
-    for t in Team.objects.all().filter(season=season()).order_by('-point', '-gp'):
+    for t in Team.objects.all().order_by('-point', '-gp'):
         name = t.team_name
         point = t.point
         grosspoint = t.grosspoint
         penalty = t.penalty
         dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
 # 勝利数トップ10を抽出
-    for p in Player.objects.all().filter(season=season()).order_by('-win','lose')[:10]:
+    for n, p in enumerate(Player.objects.all().order_by('-win','lose')[:10]):
         name = p.player_name
         win = p.win
         lose = p.lose
         team = p.team.team_name
         dic2[name] = {"name": name,  "team": team+".png", "win": win, "lose": lose}
+        if n == 9:
+            for x in Player.objects.all().filter(win = win).filter(lose=lose):
+                if x.player_name in dic2.keys():
+                    pass
+                else:
+                    name = x.player_name
+                    win = x.win
+                    lose = x.lose
+                    team = x.team.team_name
+                    dic2[name] = {"name": name, "team": team + ".png", "win": win, "lose": lose}
+
 # リーダーごとの勝利数を回収
-    for c in ClassWinRate.objects.filter(season=season()).all():
+    for c in ClassWinRate.objects.all():
         name = c.leader
         rate = c.rate
         total = c.total
@@ -81,13 +91,13 @@ def logout(request):
     return render(request, 'logout.html')
 
 def final(request):
-    t = Tournament.objects.all().filter(season=season()).get()
+    t = Tournament.objects.all().get()
     dicp = {"team1": t.team1+".png", "team2": t.team2+".png", "team3": t.team3+".png", "team4": t.team4+".png", "team5": t.team5+".png", "team6": t.team6+".png",
            "quauter1": t.quauter1+".png", "quauter2": t.quauter2+".png",
-           "semi1": t.semi1+".png", "semi2": t.semi2+".png","winner": t.winner+".png", "season": t.season}
+           "semi1": t.semi1+".png", "semi2": t.semi2+".png","winner": t.winner+".png"}
     dicn = {"team1": t.team1, "team2": t.team2, "team3": t.team3, "team4": t.team4, "team5": t.team5, "team6": t.team6,
            "quauter1": t.quauter1, "quauter2": t.quauter2,
-           "semi1": t.semi1, "semi2": t.semi2,"winner": t.winner, "season": t.season}
+           "semi1": t.semi1, "semi2": t.semi2,"winner": t.winner}
     dic  = {"dicp": dicp, "dicn": dicn}
     return render(request, 'attendance/final.html', {"dic": dic})
 
@@ -128,7 +138,7 @@ def listdate(request):
 
 def listmake(request, date):
     if Match.objects.filter(pk=date).get().match_table_release == True:
-        t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
+        t = Table.objects.filter(date=Match.objects.filter(pk=date).get())
         dic = {}
         c = 0
         for x in t:
@@ -157,7 +167,7 @@ def listmake(request, date):
 
 @login_required
 def index(request):
-    m = Match.objects.all().filter(season=season()).filter(register_release=True)
+    m = Match.objects.all().filter(register_release=True)
     dic = {}
     for x in m:
         id = x.id
@@ -169,9 +179,9 @@ def index(request):
 
 @login_required
 def date(request, date):
-    x = Team.objects.filter(season=season()).filter(team_name=request.user).get()
+    x = Team.objects.filter(team_name=request.user).get()
     mylist = []
-    for m in x.player_set.all():
+    for m in Player.objects.all().filter(team = x).filter(visible=True):
         mylist.append(m.player_name)
     return render(request, 'attendance/date.html', {"date": date, "team_member": mylist})
 @login_required
@@ -184,13 +194,13 @@ def result(request, date):
     fifth = request.GET.get('fifth')
     hoketsu = request.GET.get('hoketsu')
     #データベースに変更を加えるぉ
-    m = Match.objects.all().filter(season=season())
+    m = Match.objects.all()
     match_instance = m.get(pk=int(date))
     time_now = timezone.now()
     Registered.objects.create(date=match_instance, team=request.user, first=first, second=second, third=third, fourth= fourth, fifth=fifth, hoketsu=hoketsu, regist_date=time_now)
 
     r = Registered.objects.filter(team=request.user)
-    m = Match.objects.all().filter(season=season())
+    m = Match.objects.all()
     dic = {}
     for x in m:  # Matchをforで回して、そのなかで一番古い登録データからfirst,...を抜く。未登録の場合は..
         try:
@@ -213,7 +223,7 @@ def result(request, date):
 
 @login_required
 def reportdate(request):
-    m = Match.objects.all().filter(season=season())
+    m = Match.objects.all()
     dic = {}
     for x in m:
         id = x.id
@@ -227,7 +237,7 @@ def reportdate(request):
 @login_required
 def report(request, date):
 
-    r = Registered.objects.filter(team = request.user).filter(date=Match.objects.all().filter(season=season()).filter(pk=date).get()).order_by('-pk').first()
+    r = Registered.objects.filter(team = request.user).filter(date=Match.objects.all().filter(pk=date).get()).order_by('-pk').first()
     mylist = [r.first, r.second, r.third, r.fourth, r.fifth, r.hoketsu]
     context = {'team_member': mylist, 'winlose': ["win", "lose"], 'leader': leader(), 'date': date}
     return render(request, 'attendance/report.html', context)
@@ -235,7 +245,7 @@ def report(request, date):
 def report_register(request, date):
 
     team = request.user.username
-    date = Match.objects.filter(season=season()).filter(pk=date).order_by('-pk').first()
+    date = Match.objects.filter(pk=date).order_by('-pk').first()
 
     first = request.GET.get('first')
     second = request.GET.get('second')
@@ -260,6 +270,14 @@ def report_register(request, date):
            {"player": third, "leader": thirdl, "winlose": thirdwl,"team": team},
            {"player": fourth, "leader": fourthl, "winlose": fourthwl,"team": team},
            {"player": fifth, "leader": fifthl, "winlose": fifthwl,"team": team}]
+    try:
+        pastrep = Reported.objects.all().filter(date = date).filter(team = team).first()
+        for pastpr in PlayerResult.objects.all().filter(rp = pastrep):
+            pastpr.delete()
+        for pasttr in TeamResult.objects.all().filter(rp = pastrep):
+            pasttr.delete()
+    except AttributeError:
+        pass
 # レポートに登録
     Reported.objects.create(
     date=date,
@@ -288,15 +306,15 @@ def report_register(request, date):
     #     t.point = 0
     #     t.grosspoint = 0
     #     t.save()
-
+    rp = Reported.objects.all().order_by("-pk").first()
 #PlayerResultとTeamResultに追加
     teamp = 0
     for d in dics:
-        PlayerResult.objects.create(date = date, player = Player.objects.filter(player_name=d["player"],team=Team.objects.all().filter(team_name=d["team"]).get()).order_by('-pk').first(), leader = d["leader"], wl = d["winlose"])
+        PlayerResult.objects.create(date = date, player = Player.objects.filter(player_name=d["player"],team=Team.objects.all().filter(team_name=d["team"]).get()).order_by('-pk').first(), leader = d["leader"], wl = d["winlose"], rp = rp)
         if d["winlose"] == "win" :
             teamp+=1
 
-    TeamResult.objects.create(date=date, team=team, point = teamp)
+    TeamResult.objects.create(date=date, team=team, point = teamp, rp = rp)
     # for m in Match.objects.all():
     #     try:
     #          for t in Table.objects.filter(date=m):
@@ -550,7 +568,7 @@ def match_result(request):
     # return render(request, 'attendance/match_result.html', {'dicts': dicts})
     dicts = {}
     dic = {}
-    for m in Match.objects.all().filter(season=season()).order_by("pk"):
+    for m in Match.objects.all().order_by("pk"):
             for t in Table.objects.filter(date=m):
                 try:
                     point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
@@ -588,7 +606,7 @@ def schedule(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def check(request):
-    t = Table.objects.filter(season=season()).filter(date=Match.objects.all().order_by('-pk').first())
+    t = Table.objects.filter(date=Match.objects.all().order_by('-pk').first())
     m = strdate(Match.objects.all().order_by('-pk').first().match_date)
     dic = {}
     c = 0
@@ -838,12 +856,12 @@ def check(request):
 
 def update(request):#チームポイントの集計
     #Playerポイントの初期化
-    for t in Team.objects.all().filter(season=season()):
+    for t in Team.objects.all():
         t.point = 0
         t.grosspoint = 0
         t.save()
 
-    for m in Match.objects.all().filter(season=season()):
+    for m in Match.objects.all():
         for t in Table.objects.filter(date=m):
             try:
                     point1 = TeamResult.objects.filter(date=m, team=t.team1.team_name).order_by("-pk").first().point
@@ -872,7 +890,7 @@ def update(request):#チームポイントの集計
 
 
 def update2(request):#プレイヤー勝敗数の集計
-    for p in Player.objects.all().filter(season=season()):
+    for p in Player.objects.all():
         p.win = 0
         p.lose = 0
         p.e_win = 0
@@ -893,8 +911,8 @@ def update2(request):#プレイヤー勝敗数の集計
         p.nc_lose = 0
         p.save()
 
-    for m in Match.objects.all().filter(season=season()):
-        for p in Player.objects.all().filter(season=season()):
+    for m in Match.objects.all():
+        for p in Player.objects.all():
             try:
                 pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
                 if pr.wl == "win":
@@ -913,7 +931,7 @@ def update2(request):#プレイヤー勝敗数の集計
 
 
 def update3(request):#クラス勝率の計算
-    for c in ClassWinRate.objects.all().filter(season=season()):
+    for c in ClassWinRate.objects.all():
         c.win = 0
         c.lose = 0
         c.rate = 0
@@ -921,8 +939,8 @@ def update3(request):#クラス勝率の計算
         c.save()
 
 
-    for m in Match.objects.all().filter(season=season()):
-        for p in Player.objects.all().filter(season=season()):
+    for m in Match.objects.all():
+        for p in Player.objects.all():
             try:
                     pr = PlayerResult.objects.filter(date=m, player=p).order_by("-pk").first()
                     if pr.leader=="エルフ":
@@ -930,7 +948,7 @@ def update3(request):#クラス勝率の計算
                             # p.e_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="エルフ").get()
+                            c = ClassWinRate.objects.filter(leader="エルフ").get()
                             c.win += 1
                             c.save()
 
@@ -939,7 +957,7 @@ def update3(request):#クラス勝率の計算
                             # p.e_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="エルフ").get()
+                            c = ClassWinRate.objects.filter(leader="エルフ").get()
                             c.lose += 1
                             c.save()
 
@@ -949,7 +967,7 @@ def update3(request):#クラス勝率の計算
                             # p.nm_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ネメシス").get()
+                            c = ClassWinRate.objects.filter(leader="ネメシス").get()
                             c.win += 1
                             c.save()
 
@@ -957,7 +975,7 @@ def update3(request):#クラス勝率の計算
                             # p.nm_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ネメシス").get()
+                            c = ClassWinRate.objects.filter(leader="ネメシス").get()
                             c.lose += 1
                             c.save()
 
@@ -966,7 +984,7 @@ def update3(request):#クラス勝率の計算
                             # p.d_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ドラゴン").get()
+                            c = ClassWinRate.objects.filter(leader="ドラゴン").get()
                             c.win += 1
                             c.save()
 
@@ -974,7 +992,7 @@ def update3(request):#クラス勝率の計算
                             # p.d_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ドラゴン").get()
+                            c = ClassWinRate.objects.filter(leader="ドラゴン").get()
                             c.lose += 1
                             c.save()
 
@@ -983,7 +1001,7 @@ def update3(request):#クラス勝率の計算
                             # p.b_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ビショップ").get()
+                            c = ClassWinRate.objects.filter(leader="ビショップ").get()
                             c.win += 1
                             c.save()
 
@@ -991,7 +1009,7 @@ def update3(request):#クラス勝率の計算
                             # p.b_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ビショップ").get()
+                            c = ClassWinRate.objects.filter(leader="ビショップ").get()
                             c.lose += 1
                             c.save()
 
@@ -1000,7 +1018,7 @@ def update3(request):#クラス勝率の計算
                             # p.r_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ロイヤル").get()
+                            c = ClassWinRate.objects.filter(leader="ロイヤル").get()
                             c.win += 1
                             c.save()
 
@@ -1008,7 +1026,7 @@ def update3(request):#クラス勝率の計算
                             # p.r_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ロイヤル").get()
+                            c = ClassWinRate.objects.filter(leader="ロイヤル").get()
                             c.lose += 1
                             c.save()
 
@@ -1017,7 +1035,7 @@ def update3(request):#クラス勝率の計算
                             # p.v_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ヴァンパイア").get()
+                            c = ClassWinRate.objects.filter(leader="ヴァンパイア").get()
                             c.win += 1
                             c.save()
 
@@ -1025,7 +1043,7 @@ def update3(request):#クラス勝率の計算
                             # p.v_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ヴァンパイア").get()
+                            c = ClassWinRate.objects.filter(leader="ヴァンパイア").get()
                             c.lose += 1
                             c.save()
 
@@ -1034,7 +1052,7 @@ def update3(request):#クラス勝率の計算
                             # p.w_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ウィッチ").get()
+                            c = ClassWinRate.objects.filter(leader="ウィッチ").get()
                             c.win += 1
                             c.save()
 
@@ -1042,7 +1060,7 @@ def update3(request):#クラス勝率の計算
                             # p.w_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ウィッチ").get()
+                            c = ClassWinRate.objects.filter(leader="ウィッチ").get()
                             c.lose += 1
                             c.save()
                     elif pr.leader == "ネクロマンサー":
@@ -1051,7 +1069,7 @@ def update3(request):#クラス勝率の計算
                             # p.nc_win += 1
                             # p.win += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ネクロマンサー").get()
+                            c = ClassWinRate.objects.filter(leader="ネクロマンサー").get()
                             c.win += 1
                             c.save()
 
@@ -1059,7 +1077,7 @@ def update3(request):#クラス勝率の計算
                             # p.nc_lose += 1
                             # p.lose += 1
                             # p.save()
-                            c = ClassWinRate.objects.filter(season=season()).filter(leader="ネクロマンサー").get()
+                            c = ClassWinRate.objects.filter(leader="ネクロマンサー").get()
                             c.lose += 1
                             c.save()
                     else:
@@ -1068,7 +1086,7 @@ def update3(request):#クラス勝率の計算
             except AttributeError:
                     pass
 
-    for c in ClassWinRate.objects.all().filter(season=season()):
+    for c in ClassWinRate.objects.all():
        try:
             total = c.win+c.lose
             c.rate = c.win/total*100
@@ -1133,7 +1151,7 @@ class PasswordChange(LoginRequiredMixin, PasswordChangeView):
 
 @user_passes_test(lambda u: u.is_superuser)
 def check(request):
-    m = Match.objects.all().filter(season=season()).all()
+    m = Match.objects.all()
     dic = {}
     for x in m:
         id = x.id
@@ -1147,50 +1165,53 @@ def check(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def listsu(request, date):
-        m = Match.objects.filter(pk=date).get()
-        if m.match_table_release == True:
-            table_release = "checked"
-        else:
-            table_release = ""
-        t = Table.objects.filter(season=season()).filter(date=Match.objects.filter(pk=date).get())
-        ldic = {}
-        dic = {}
-        c = 0
-        for x in t:
-            c+=1
-            try:
-                r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
-                order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
-            except AttributeError:
-                order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+    m = Match.objects.filter(pk=date).get()
+    if m.match_table_release == True:
+        table_release = "checked"
+    else:
+        table_release = ""
+    t = Table.objects.filter(date=Match.objects.filter(pk=date).get())
+    ldic = {}
+    dic = {}
+    c = 0
+    for x in t:
+        c += 1
+        try:
+            r1 = Registered.objects.filter(date=x.date, team=x.team1).order_by('-pk').first()
+            order1 = [r1.first, r1.second, r1.third, r1.fourth, r1.fifth, r1.hoketsu]
+        except AttributeError:
+            order1 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
-            try:
-                r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
-                order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
-            except AttributeError:
-                order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
+        try:
+            r2 = Registered.objects.filter(date=x.date, team=x.team2).order_by('-pk').first()
+            order2 = [r2.first, r2.second, r2.third, r2.fourth, r2.fifth, r2.hoketsu]
+        except AttributeError:
+            order2 = ["###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###", "###未提出###"]
 
-            first = ["一番手", order1[0], order2[0]]
-            second = ["二番手", order1[1], order2[1]]
-            third = ["三番手", order1[2], order2[2]]
-            fourth = ["四番手", order1[3], order2[3]]
-            fifth=["五番手", order1[4], order2[4]]
-            hoketsu=["補欠", order1[5], order2[5]]
-            dic[str(c)+":"+x.team1.team_name+" vs "+x.team2.team_name] = [first, second, third, fourth, fifth, hoketsu]
-        ldic["dic"] = dic
-        ldic["table_release"] = table_release
-        ldic["date"] = date
-        return render(request, 'attendance/tablesu.html', {'ldic': ldic})
+        first = ["一番手", order1[0], order2[0]]
+        second = ["二番手", order1[1], order2[1]]
+        third = ["三番手", order1[2], order2[2]]
+        fourth = ["四番手", order1[3], order2[3]]
+        fifth = ["五番手", order1[4], order2[4]]
+        hoketsu = ["補欠", order1[5], order2[5]]
+        dic[str(c) + ":" + x.team1.team_name + " vs " + x.team2.team_name] = [first, second, third, fourth, fifth,
+                                                                              hoketsu]
+    ldic["dic"] = dic
+    ldic["table_release"] = table_release
+    ldic["date"] = date
+    return render(request, 'attendance/tablesu.html', {'ldic': ldic})
+
+
 @login_required
 def member(request):
-    p = Player.objects.filter(team = Team.objects.filter(team_name=request.user).get()).order_by("win")
+    p = Player.objects.filter(team=Team.objects.filter(team_name=request.user).get()).order_by("win")
     li = []
     for q in p:
         li.append([q.player_name, q.win, q.lose])
     return render(request, 'attendance/member.html', {'dic': li})
 
-@user_passes_test(lambda u: u.is_superuser, date)
 
+@user_passes_test(lambda u: u.is_superuser, date)
 def release_changed(request, date):
     m = Match.objects.filter(pk=date).get()
     if request.GET["table_release"] == "on":
@@ -1206,13 +1227,110 @@ def release_changed(request, date):
     m.save()
     dic = {}
     dic["day"] = strdate(m.match_date)
-    dic["state"]= state
+    dic["state"] = state
 
-
-    return render(request, 'attendance/release_changed.html', {"dic":dic})
+    return render(request, 'attendance/release_changed.html', {"dic": dic})
 
 
 def team_page(request, team_name):
-    dict = {"team_name":team_name+".png"}
+    dict = {}
+    dict["team"]=team_name + ".png"
+    dict["team_name"] = team_name
+    t = Team.objects.all().filter(team_name=team_name).get()
+    dict["start"]=t.start
+    dict["words"]=t.words
+    dict["leader"] = t.leader
+    dict["los"] = []
+    for p in Past.objects.all():
+        season = p.season
+        if t.team_name == p.team1:
+            dict["los"].append([season, p.team1, "優勝"])
+        elif t.team_name == p.team2:
+            dict["los"].append([season, p.team2, "準優勝"])
+        elif t.team_name == p.team3:
+            dict["los"].append([season, p.team3, "4位"])
+        elif t.team_name == p.team4:
+            dict["los"].append([season, p.team4, "4位"])
+        elif t.team_name == p.team5:
+            dict["los"].append([season, p.team5, "6位"])
+        elif t.team_name == p.team6:
+            dict["los"].append([season, p.team6, "6位"])
 
-    return render(request, 'team_page__.html', dict)
+    counter = 0
+    total = 0
+    dic = {}
+
+    for p in Player.objects.all().filter(team=Team.objects.all().filter(team_name=team_name).get()):
+        try:
+            j = JCGrank.objects.all().filter(JCGID=p.playerid).first()
+            xx = [p.twitter, j.first, j.second, j.fourth]
+            total += j.total
+        except:
+            xx = [p.twitter,0,0,0]
+        losli = []
+        pc = 1
+        for ps in Past.objects.all():
+            if p.player_name == ps.player1:
+                losli.append(["1",ps.season, ps.place1])
+            elif p.player_name == ps.player2:
+                losli.append(["1",ps.season, ps.place2])
+            elif p.player_name == ps.player3:
+                losli.append(["1",ps.season, ps.place3])
+            elif p.player_name == ps.player4:
+                losli.append(["1",ps.season, ps.place4])
+            elif p.player_name == ps.player5:
+                losli.append(["1",ps.season, ps.place5])
+            elif p.player_name == ps.player6:
+                losli.append(["1",ps.season, ps.place6])
+            elif p.player_name == ps.player7:
+                losli.append(["1",ps.season, ps.place7])
+            elif p.player_name == ps.player8:
+                losli.append(["1",ps.season, ps.place8])
+            elif p.player_name == ps.player9:
+                losli.append(["1",ps.season, ps.place9])
+            elif p.player_name == ps.player10:
+                losli.append(["1",ps.season, ps.place10])
+            pc+=1
+        dic[p.player_name] = [xx, losli,pc]
+        counter+=1
+    dict["counter"] = counter
+    dict["total"] = total
+    dict["dic"]=dic
+    return render(request, 'team_page.html', dict)
+
+def jcgrank(request):
+    jp = JCGrank.objects.all().order_by("-total").values_list("total", flat = True)[::-1][::-1]
+    mli = sorted(set(jp), key=jp.index)
+    li = []
+    for m in mli:
+        if m >= 10:
+            for j in JCGrank.objects.all().filter(total=m):
+                dic = {}
+                dic["player_name"]=j.player_name
+                dic["first"]= j.first
+                dic["second"] = j.second
+                dic["fourth"] = j.fourth
+                dic["total"]=j.total
+                try:
+                    dic["team"] = Player.objects.all().filter(playerid = j.JCGID).first().team.team_name +".png"
+                    dic["team_name"] = Player.objects.all().filter(playerid = j.JCGID).first().team.team_name
+                except:
+                    dic["team"] = "-.png"
+                    dic["team_name"] = "-"
+                li.append(dic)
+    dict = {"li": li}
+    lastest_reload = Season.objects.all().order_by("-pk").first().lastest_reload
+    return render(request, 'jcgrank.html', {"dict":dict, "last_reload": lastest_reload})
+
+def team_page_edit(request):
+    # t = Team.objects.all().filter(team=request.user).get()
+    return render(request,"attendance/team_page_edit.html")
+
+def team_page_edit_done(request):
+    t = Team.objects.all().filter(team_name=request.user).get()
+    t.leader = request.GET.get('leader')
+    t.start = request.GET.get('establish')
+    t.words = request.GET.get('msg')
+    t.save()
+    return render(request,"attendance/team_page_change_done.html")
+

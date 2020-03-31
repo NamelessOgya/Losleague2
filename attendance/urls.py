@@ -20,6 +20,8 @@ urlpatterns = [
     path('final', views.final),
     path('past', views.past),
     path('member', views.member),
-    path('release_changed/<str:date>', views.release_changed)
+    path('release_changed/<str:date>', views.release_changed),
+    path('team_page_edit', views.team_page_edit),
+    path('team_page_edit/done', views.team_page_edit_done),
 
 ]

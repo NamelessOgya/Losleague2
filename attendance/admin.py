@@ -1,9 +1,9 @@
 
 from django.contrib import admin
-from .models import Team, Player, Match, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past
+from .models import Team, Player, Match, Registered, Table, Reported, PlayerResult, TeamResult, ClassWinRate, Blog, Season, Tournament, Past, JCGrank
 # Register your models here.
 class PlayerAdmin(admin.ModelAdmin):
-    list_filter = ["team", "season"]
+    list_filter = ["team"]
 class ReportedAdmin(admin.ModelAdmin):
     list_filter = ["date", "team"]
 
@@ -11,7 +11,7 @@ class RegisteredAdmin(admin.ModelAdmin):
     list_filter = ["date", "team"]
 
 class TableAdmin(admin.ModelAdmin):
-    list_filter = ["date", "season"]
+    list_filter = ["date"]
 
 class PlayerResultAdmin(admin.ModelAdmin):
     list_filter = ["date","player", "leader", "wl"]
@@ -34,7 +34,7 @@ admin.site.register(Blog)
 admin.site.register(Season)
 admin.site.register(Tournament)
 admin.site.register(Past)
-
+admin.site.register(JCGrank)
 
 
 
