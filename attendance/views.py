@@ -1338,3 +1338,11 @@ def team_page_edit_done(request):
     t.save()
     return render(request,"attendance/team_page_change_done.html")
 
+def team_page_home(request):
+    teamli = []
+    for t in Team.objects.all():
+        li = []
+        li.append(t.team_name)
+        li.append(t.team_name+".png")
+        teamli.append(li)
+    return render(request, 'team_page_home.html', {"teamli":teamli})
