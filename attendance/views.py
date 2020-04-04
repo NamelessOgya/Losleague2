@@ -102,7 +102,7 @@ def final(request):
     return render(request, 'attendance/final.html', {"dic": dic})
 
 def listdate(request):
-        m = Match.objects.all().filter(season=season()).filter(match_table_release=True)
+        m = Match.objects.all().filter(match_table_release=True)
         dic = {}
         for x in m:
             id = x.id
