@@ -207,6 +207,8 @@ class JCGrank(models.Model):
     second = models.IntegerField(verbose_name='2nd', blank=True, null=True, default=0)
     fourth = models.IntegerField(verbose_name='4th', blank=True, null=True, default=0)
     total = models.IntegerField(verbose_name='total', blank=True, null=True, default=0)
+    def __str__(self):
+        return self.player_name
 
 class Other_tournament(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)

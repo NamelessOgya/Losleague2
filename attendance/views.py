@@ -1260,7 +1260,7 @@ def team_page(request, team_name):
     total = 0
     dic = {}
 
-    for p in Player.objects.all().filter(team=Team.objects.all().filter(team_name=team_name).get()):
+    for p in Player.objects.all().filter(team=Team.objects.all().filter(team_name=team_name).get()).filter(visible=True):
         try:
             j = JCGrank.objects.all().filter(JCGID=p.playerid).first()
             xx = [p.twitter, j.first, j.second, j.fourth]
