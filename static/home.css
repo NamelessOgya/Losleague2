@@ -19,14 +19,14 @@ color:white;
     height:9rem
 }
 .result{
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 @media screen and (min-width:600px) {
     .home {
         height: 25rem;
     }
     .result{
-    font-size: 1rem;
+    font-size: 1.2rem;
     }
 }
 .tabbutton{
