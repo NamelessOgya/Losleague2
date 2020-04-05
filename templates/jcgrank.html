@@ -8,13 +8,13 @@
                  <a>JCG 2Pick 賞金ランキング({{ last_reload }}更新)</a>
              </div>
          </div>
-         <div class = "row" style = "height:2rem;">
+         <div class = "row" style = "height:2rem; font-size:0.8rem">
              <div class = "container">
              <a>表記漏れ、名前の変更等は</a><a href = "https://twitter.com/hakuginnnohana">vetpath</a><a>まで連絡お願いします。</a>
              </div>
          </div>
         <table class = "table">
-            <thread class = "active">
+            <tr class = "active" bgcolor="#C0C0C0" style="font-size:0.7rem;">
                 <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;"></th>
 
                 <th colspan="6" class = "text-center align-middle">氏名</th>
@@ -23,7 +23,7 @@
                 <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">2位</th>
                 <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">4位</th>
                 <th class = "text-center align-middle" style = "padding-right: 0;padding-left: 0;">total</th>
-            </thread>
+            </tr>
             {% for p, d in dict.items %}
             {% for ds in d %}
                 <tr>
