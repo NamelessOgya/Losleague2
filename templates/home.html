@@ -54,30 +54,31 @@
 
     <div class = "container-fluid ">
     <div class="box">
+        <div class = "container-fluid" style = "margin-top:1rem;">
 <!--       <div class="mx-auto">-->
-            <ul class="nav nav-tabs">
-                <li class="active tabbutton "><a data-toggle="tab" href="#home">チーム</a></li>
-                <li class="tabbutton"><a data-toggle="tab" href="#menu1">個人</a></li>
-                <li class="tabbutton"><a data-toggle="tab" href="#menu2">クラス別</a></li>
+            <ul class="nav nav-pills nav-fill" id = "myTab" role = "tablist">
+                <li class="active nav-item border"><a class = "nav-link active" href="#home" data-toggle = "pill">チーム</a></li>
+                <li class="nav-item border"><a class = "nav-link" href="#menu1" data-toggle = "pill">個人</a></li>
+                <li class="nav-item border"><a class = "nav-link" href="#menu2" data-toggle = "pill">クラス別</a></li>
 
             </ul>
 
 <!--             チーム成績-->
                 <div class="tab-content result">
-                  <div id="home" class="tab-pane fade show active">
+                  <div id="home" class="tab-pane fade show active" role = "tabpanel">
                       <div class = "container">
                      <p>勝ち点によって順位が決定</p>
                       <p>勝ち点同点の場合得失点-ペナルティの値により決定</p>
                       </div>
                      <table class = "table">
-                         <thread class = "active">
+                         <tr class = "active" bgcolor="#C0C0C0" style = "border:0;">
                              <th></th>
-                             <th colspan="2" class = "text-center align-middle">チーム名</th>
+                             <th colspan="2" class = "text-center align-middle" style="border:0;font-size:0.8rem;">チーム名</th>
 
-                             <th class = "text-center align-middle">勝点</th>
-                             <th class = "text-center align-middle">得点差</th>
-                             <th class = "text-center align-middle">減点</th>
-                         </thread>
+                             <th class = "text-center align-middle" style="border:0;font-size:0.8rem;">勝点</th>
+                             <th class = "text-center align-middle" style="border:0;font-size:0.8rem;">点差</th>
+                             <th class = "text-center align-middle" style="border:0;font-size:0.8rem;">減点</th>
+                         </tr>
 
                      {% for key, value in dic1.items %}
                             <tr>
@@ -107,18 +108,18 @@
                   </div>
 
 <!--                個人成績上位者-->
-                    <div id="menu1" class="tab-pane fade">
+                    <div id="menu1" class="tab-pane fade" role = "tabpanel">
                         <div class = "container">
                         <p>勝利数トップ10のみ表示</p>
                         </div>
-                        <a style="color:red;"></a>
+                        <a style=""></a>
                         <table class="table">
-                                 <tr>
+                                 <tr bgcolor=#C0C0C0>
                                      <th></th>
-                                     <th class = "text-center align-middle">名前</th>
-                                     <th class = "text-center align-middle">所属</th>
-                                     <th class = "text-center align-middle">勝利数</th>
-                                     <th class = "text-center align-middle">敗北数</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">名前</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">所属</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">win</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">lose</th>
                                  </tr>
 
                              {% for key, value in dic2.items %}
@@ -148,14 +149,14 @@
                          </table>
                     </div>
 <!--                クラス別勝利数-->
-                     <div id="menu2" class="tab-pane fade">
+                     <div id="menu2" class="tab-pane fade" role = "tabpanel">
 
                         <p style="color:red;"></p>
                             <table class="table">
-                                         <tr>
-                                             <th colspan="2" class = "text-center align-middle">クラス</th>
-                                             <th class = "text-center align-middle">勝率</th>
-                                             <th class = "text-center align-middle">使用数</th>
+                                         <tr bgcolor="#C0C0C0">
+                                             <th colspan="2" class = "text-center align-middle" style="font-size:0.8rem;">クラス</th>
+                                             <th class = "text-center align-middle" style="font-size:0.8rem;">勝率</th>
+                                             <th class = "text-center align-middle" style="font-size:0.8rem;">使用数</th>
                                          </tr>
 
                                      {% for key, value in dic3.items %}
@@ -177,7 +178,9 @@
                              </table>
                      </div>
                 </div>
+        </div>
 <!--       </div>-->
+
 </div>
 </div>
 <!--            コンテンツ一単位-->
