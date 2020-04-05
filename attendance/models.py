@@ -192,6 +192,8 @@ class Past(models.Model):
     player10 = models.CharField(max_length=100, default="-")
     r10 = models.CharField(max_length=100, default="-")
     place10 = models.CharField(max_length=100, default="-")
+    def __str__(self):
+        return "LOSリーグシーズン"+str(self.season)
 
 class Season(models.Model):
     season = models.IntegerField(verbose_name='season', blank=True, null=True, default=0)
