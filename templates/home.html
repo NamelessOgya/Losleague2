@@ -153,18 +153,24 @@
                         <p style="color:red;"></p>
                             <table class="table">
                                          <tr>
-                                             <th>クラス</th>
-                                             <th>勝率</th>
-                                             <th>使用数</th>
+                                             <th colspan="2" class = "text-center align-middle">クラス</th>
+                                             <th class = "text-center align-middle">勝率</th>
+                                             <th class = "text-center align-middle">使用数</th>
                                          </tr>
 
                                      {% for key, value in dic3.items %}
                                             <tr>
-                                                {% for x, y in value.items %}
-                                                <th class="c-txtsp">
-                                                 {{ y }}
+
+                                                <th colspan = "2" class="text-center align-middle">
+                                                 {{ value.name }}
                                                 </th>
-                                                {% endfor %}
+                                                <th class="text-center align-middle">
+                                                 {{ value.rate }}
+                                                </th>
+                                                <th class="text-center align-middle">
+                                                 {{ value.total }}
+                                                </th>
+
                                             </tr>
                                     {% endfor %}
 
