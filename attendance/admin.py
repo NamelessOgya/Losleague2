@@ -22,6 +22,11 @@ class PlayerAdmin(admin.ModelAdmin):
 class Other_tournamentAdmin(admin.ModelAdmin):
     list_filter = ["tournament"]
 
+class JCGrankAdmin(admin.ModelAdmin):
+    list_display = ["JCGID", "player_name", "first", "second", "fourth", "total"]
+    ordering = ['JCGID']
+    search_fields = ["JCGID", "player_name"]
+
 
 admin.site.register(Team)
 admin.site.register(Player, PlayerAdmin)
@@ -36,7 +41,7 @@ admin.site.register(Blog)
 admin.site.register(Season)
 admin.site.register(Tournament)
 admin.site.register(Past)
-admin.site.register(JCGrank)
+admin.site.register(JCGrank,JCGrankAdmin )
 admin.site.register(Other_tournament)
 
 
