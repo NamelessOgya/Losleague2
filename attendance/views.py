@@ -49,9 +49,9 @@ def home(request):
     for t in Team.objects.all().order_by('-point', '-gp'):
         name = t.team_name
         point = t.point
-        grosspoint = t.grosspoint
+        gp = t.gp
         penalty = t.penalty
-        dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": grosspoint, "penalty": penalty}
+        dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": gp, "penalty": penalty}
 # 勝利数トップ10を抽出
     for n, p in enumerate(Player.objects.all().order_by('-win','lose')[:10]):
         name = p.player_name
