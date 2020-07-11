@@ -1263,10 +1263,10 @@ def team_page(request, team_name):
     for p in Player.objects.all().filter(team=Team.objects.all().filter(team_name=team_name).get()).filter(visible=True):
         try:
             j = JCGrank.objects.all().filter(JCGID=p.playerid).first()
-            xx = [p.twitter[1:-1], j.first, j.second, j.fourth]
+            xx = [p.twitter[1:], j.first, j.second, j.fourth]
             total += j.total
         except:
-            xx = [p.twitter[1:-1],0,0,0]
+            xx = [p.twitter[1:],0,0,0]
         losli = []
         pc = 1
         for ps in Past.objects.all():
