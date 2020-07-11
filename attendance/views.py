@@ -1266,7 +1266,7 @@ def team_page(request, team_name):
             xx = [p.twitter, j.first, j.second, j.fourth]
             total += j.total
         except:
-            xx = [p.twitter,0,0,0]
+            xx = [p.twitter[1:-1],0,0,0]
         losli = []
         pc = 1
         for ps in Past.objects.all():
@@ -1345,4 +1345,5 @@ def team_page_home(request):
         li.append(t.team_name)
         li.append(t.team_name+".png")
         teamli.append(li)
+        
     return render(request, 'team_page_home.html', {"teamli":teamli})
