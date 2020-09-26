@@ -1316,8 +1316,8 @@ def jcgrank(request):
                 dic["fourth"] = j.fourth
                 dic["total"]=j.total
                 try:
-                    dic["team"] = Player.objects.all().filter(playerid = j.JCGID).first().team.team_name +".png"
-                    dic["team_name"] = Player.objects.all().filter(playerid = j.JCGID).first().team.team_name
+                    dic["team"] = Player.objects.all().filter(playerid = j.JCGID).filter(visible=True).first().team.team_name +".png"
+                    dic["team_name"] = Player.objects.all().filter(playerid = j.JCGID).filter(visible=True).first().team.team_name
                 except:
                     dic["team"] = "-.png"
                     dic["team_name"] = "-"
