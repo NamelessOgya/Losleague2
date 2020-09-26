@@ -53,14 +53,14 @@ def home(request):
         penalty = t.penalty
         dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": gp, "penalty": penalty}
 # 勝利数トップ10を抽出
-    for n, p in enumerate(Player.objects.all().order_by('-win','lose')[:10]):
+    for n, p in enumerate(Player.objects.all().filter(visible = True).order_by('-win','lose')[:10]):
         name = p.player_name
         win = p.win
         lose = p.lose
         team = p.team.team_name
         dic2[name] = {"name": name,  "team": team+".png", "win": win, "lose": lose}
         if n == 9:
-            for x in Player.objects.all().filter(win = win).filter(lose=lose):
+            for x in Player.objects.all().filter(win = win).filter(lose=lose).filter(visible = True):
                 if x.player_name in dic2.keys():
                     pass
                 else:
