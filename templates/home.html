@@ -112,7 +112,7 @@
 <!--                個人成績上位者-->
                     <div id="menu1" class="tab-pane fade" role = "tabpanel">
                         <div class = "container">
-                        <p>勝利数トップ10のみ表示</p>
+                        <p>試合数6以上の場合に掲載</p>
                         </div>
                         <a style=""></a>
                         <table class="table">
@@ -120,8 +120,8 @@
                                      <th></th>
                                      <th class = "text-center align-middle" style="font-size:0.8rem;">名前</th>
                                      <th class = "text-center align-middle" style="font-size:0.8rem;">所属</th>
-                                     <th class = "text-center align-middle" style="font-size:0.8rem;">win</th>
-                                     <th class = "text-center align-middle" style="font-size:0.8rem;">lose</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">勝率</th>
+                                     <th class = "text-center align-middle" style="font-size:0.8rem;">試合数</th>
                                  </tr>
 
                              {% for key, value in dic2.items %}

@@ -53,22 +53,42 @@ def home(request):
         penalty = t.penalty
         dic1[name] = { "id": name+".png","name": name, "point": point, "grosspoint": gp, "penalty": penalty}
 # 勝利数トップ10を抽出
-    for n, p in enumerate(Player.objects.all().filter(visible = True).order_by('-win','lose')[:10]):
+    # for n, p in enumerate(Player.objects.all().filter(visible = True).order_by('-win','lose')[:10]):
+    #     name = p.player_name
+    #     win = p.win
+    #     lose = p.lose
+    #     team = p.team.team_name
+    #     dic2[name] = {"name": name,  "team": team+".png", "win": win, "lose": lose}
+    #     if n == 9:
+    #         for x in Player.objects.all().filter(win = win).filter(lose=lose).filter(visible = True):
+    #             if x.player_name in dic2.keys():
+    #                 pass
+    #             else:
+    #                 name = x.player_name
+    #                 win = x.win
+    #                 lose = x.lose
+    #                 team = x.team.team_name
+    #                 dic2[name] = {"name": name, "team": team + ".png", "win": win, "lose": lose}
+
+ #試合数5以上かつ勝率順
+    for n, p in enumerate(Player.objects.all().filter(visible = True).raw(
+        "SELECT * FROM (SELECT *, rank() OVER(order by rate DESC) AS jun FROM (SELECT *, CAST(CAST(win AS real) / CAST(sum AS real)*100 AS INT64) AS rate  FROM (SELECT *, win + lose AS sum FROM attendance_player WHERE sum >= 6)))where jun <= 10 ORDER BY jun "
+    )):
         name = p.player_name
-        win = p.win
-        lose = p.lose
+        win = p.rate
+        lose = p.sum
         team = p.team.team_name
         dic2[name] = {"name": name,  "team": team+".png", "win": win, "lose": lose}
-        if n == 9:
-            for x in Player.objects.all().filter(win = win).filter(lose=lose).filter(visible = True):
-                if x.player_name in dic2.keys():
-                    pass
-                else:
-                    name = x.player_name
-                    win = x.win
-                    lose = x.lose
-                    team = x.team.team_name
-                    dic2[name] = {"name": name, "team": team + ".png", "win": win, "lose": lose}
+        # if n == 9:
+        #     for x in Player.objects.all().filter(win = win).filter(lose=lose).filter(visible = True):
+        #         if x.player_name in dic2.keys():
+        #             pass
+        #         else:
+        #             name = x.player_name
+        #             win = x.win
+        #             lose = x.lose
+        #             team = x.team.team_name
+        #             dic2[name] = {"name": name, "team": team + ".png", "win": lose, "lose": win}
 
 # リーダーごとの勝利数を回収
     for c in ClassWinRate.objects.all():
