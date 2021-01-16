@@ -75,7 +75,7 @@ def home(request):
 
  #試合数5以上かつ勝率順
     for n, p in enumerate(Player.objects.all().filter(visible = True).raw(
-        """SELECT * FROM (SELECT *, rank() OVER(order by rate DESC) AS jun FROM (SELECT *, CAST(CAST(win AS real) / CAST(sum AS real)*100 AS INT64) AS rate  FROM (SELECT *, win + lose AS sum FROM attendance_player WHERE sum >= 6)))where jun <= 10 ORDER BY jun """
+        """SELECT * FROM (SELECT *, rank() OVER(order by rate DESC) AS jun FROM (SELECT *, CAST(CAST(win AS real) / CAST(sum AS real)*100 AS INT64) AS rate  FROM (SELECT *, win + lose AS sum FROM attendance_player WHERE sum >= 6)))"""
     )):
         name = p.player_name
         win = p.rate
