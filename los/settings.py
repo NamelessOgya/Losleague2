@@ -132,7 +132,7 @@ LOGIN_REDIRECT_URL = '/attendance/user/'
 LOGOUT_REDIRECT_URL = '/logout'
 
 #heroku用
-DEBUG = FALSE
+DEBUG = False
 
 try:
     from .local_settings import *
