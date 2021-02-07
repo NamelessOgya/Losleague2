@@ -17,7 +17,7 @@
                     </div>
                     <div class = "panel-body contentbox">
                         <div class="container">
-                        <a class="p-2 mb-3">{{value.context | linebreaksbr}}</a>
+                        <a class="p-2 mb-3">{% filter linebreaksbr | urlize %}{{value.context}}{% endfilter %}</a>
                     </div>
                     </div>
                 </div>
